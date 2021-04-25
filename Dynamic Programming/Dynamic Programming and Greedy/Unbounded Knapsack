@@ -1,0 +1,38 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/unbounded-knapsack-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+    int n,cap;
+    cin>>n;
+    int vals[n],wts[n];
+    for(int i=0;i<n;i++){
+        cin>>vals[i];
+    }
+    for(int i=0;i<n;i++){
+        cin>>wts[i];
+    }
+    cin>>cap;
+    int dp[cap+1]={ 0 };
+    for(int bagc=1;bagc<cap+1;bagc++){
+    int max = 0;
+        for(int i=0;i<n;i++){
+             
+             if(wts[i]<=bagc){
+                 int remaining_bag_capacity = bagc-wts[i];
+                 int remaining_bag_value = dp[remaining_bag_capacity];
+                 int total_bag_value = remaining_bag_value  + vals[i];
+                 
+                 if(total_bag_value > max){
+                     max = total_bag_value ;
+                 }
+             }
+        }
+        dp[bagc]= max;
+    }
+    cout<<dp[cap];
+    return 0;
+}
