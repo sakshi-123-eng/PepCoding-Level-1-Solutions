@@ -1,0 +1,35 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/patterns/design-pattern-17-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h> 
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	int st=1;
+	for(int i=1;i<=n;i++){
+		if(i== int(n/2)+1){
+			for(int j=1;j<=int(n/2);j++){
+			cout<<"*	";
+		}
+		}
+		else{
+			for(int j=1;j<=int(n/2);j++){
+			cout<<"	";
+		}
+		}
+		for(int j=1;j<=st;j++){
+			cout<<"*	";
+		}
+		if(i<=n/2){
+			st++;
+		}
+		else{
+			st--;
+		}
+		cout<<"\n";
+	}
+		return 0;
+}
