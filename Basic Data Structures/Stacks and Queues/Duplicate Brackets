@@ -1,0 +1,32 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/duplicate-brackets-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+  stack<char>data;
+  string str;
+  getline(cin,str);
+  for(int i=0;i<str.length();i++){
+    if(str[i]!=')'){
+      data.push(str[i]);
+    }else{
+      if(data.top()=='('){
+        cout<<"true";
+        return 0;
+      }else{
+      while(data.top()!='('){
+        data.pop();
+      }
+      data.pop();
+      }
+    }
+  }
+  cout<<"false";
+  
+   return 0;
+    
+}
