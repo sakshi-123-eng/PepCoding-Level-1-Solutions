@@ -1,0 +1,35 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/time-and-space-complexity/target-sum-pair-1-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h> 
+using namespace std;
+void targetSumPair(int arr[],int n,int t){
+    sort(arr,arr+n);
+    int li=0;
+    int ri= n-1;
+    while(li<ri){
+        if(arr[li]+arr[ri]<t){
+            li++;
+        }else if(arr[li]+arr[ri]>t){
+            ri--;
+        }else{
+            cout<<arr[li]<<", "<<arr[ri]<<"\n";
+            li++;
+            ri--;
+        }
+    }
+}
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int t;
+    cin>>t;
+    targetSumPair(arr,n,t);
+    return 0;
+}
