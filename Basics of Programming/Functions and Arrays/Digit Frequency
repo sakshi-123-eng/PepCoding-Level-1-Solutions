@@ -1,0 +1,22 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/function-and-arrays/digit-frequency-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+	int num,digit,count=0;
+	cin>>num;
+	cin>>digit;
+	while(num){
+		long int rem=num%10;
+		if(rem==digit){
+			count++;
+		}
+		num=num/10;
+	}
+	cout<<count;
+  
+	return 0;
+}
