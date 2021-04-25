@@ -1,0 +1,47 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/patterns/design-pattern-12-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int fib(int n){
+	int t1=0,t2=1,nextm;
+	for(int i=1;i<=n;i++){
+		if(i==1 ){
+			if(n==1){
+				return t1;
+			}
+			else{
+				continue;
+			}
+			
+		}
+		if(i==2 ){
+				if(n==2){
+				return t2;
+			}
+			else{
+				continue;
+			}
+		}
+		nextm=t1+t2;
+		t1=t2;
+		t2=nextm;
+		
+	}
+	return t2;
+}
+int main(){
+	int n ,s=1;
+	cin>>n;
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=i;j++){
+			cout<<fib(s)<<"	";
+			s++;
+		}
+		cout<<"\n";
+	}
+	
+	return 0;
+}
