@@ -1,0 +1,36 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/string,-string-builder-and-arraylist/print-all-permutations-of-a-string-iteratively-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+int fact(int l){
+    if(l<=0){
+        return 1;
+    }
+    int p = l*fact(l-1);
+    return(p);
+}
+int main(){
+    string str;
+    cin>>str;
+    int l = str.length();
+    int f = fact(l);
+    for(int i=0;i<f;i++){
+        string s = str;
+        int temp = i;
+        for(int div = l; div >= 1;div--){
+            int q = temp/div;
+            int r = temp%div;
+            
+            cout<<s[r];
+            s.erase(r,1);
+            
+            temp = q;
+        }
+        cout<<endl;
+    }
+    
+    return 0;
+}
