@@ -1,0 +1,54 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/patterns/design-pattern-6-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	int p=0,q=0;
+	int t=n;
+	if(n%2!=0){
+	for(int i=int(n/2)+1;i>=1;i--){
+		for(int j=1;j<=i;j++){
+			cout<<"*"<<"	";
+		}
+		for(int k=i;k<=int(n/2);k++){
+			cout<<"	";
+		}
+		
+		for(int l=1;l<=p+1;l++){
+			cout<<"	";
+		}
+		for(int m=i;m>=1;m--){
+			cout<<"*"<<"	";
+		}
+		p++;
+		cout<<"\n";
+	}
+	//next line
+	for(int i=2;i<=int(n/2)+1;i++){
+		for(int j=1;j<=i;j++){
+			cout<<"*"<<"	";
+		}
+		for(int k=i;k<=int(n/2);k++){
+			cout<<"	";
+		}
+		cout<<"	";
+		for(int l=i;l<=int(n/2);l++){
+			cout<<"	";
+		}
+		for(int m=i;m>=1;m--){
+			cout<<"*"<<"	";
+		}
+		q++;
+		
+		cout<<"\n";
+	}
+	
+}
+	
+	return 0;
+}
