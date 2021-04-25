@@ -1,0 +1,61 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/recursion-with-arraylists/get-maze-paths-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+vector<string> getMazePaths(int sr,int sc ,int dr, int dc){
+    if(sr==dr && sc==dc){
+        vector<string>bres = {""};
+        return bres;
+    }
+    
+    
+    
+    vector<string> hpaths;
+    vector<string> vpaths;
+    if(sc<dc){
+        hpaths= getMazePaths(sr,sc+1,dr,dc);
+    }
+    if(sr<dr){
+        vpaths= getMazePaths(sr+1,sc,dr,dc);
+    }
+    
+    vector<string> paths;
+    for(string hpath:hpaths){
+        paths.push_back("h"+ hpath);
+    }
+    for(string vpath:vpaths){
+        paths.push_back("v"+ vpath);
+    }
+    
+    return paths;
+}
+
+int main(){
+    int n,m;
+    cin>>n>>m;
+    
+    vector<string> paths = getMazePaths(1,1,n,m);
+    
+    cout<<"[";
+    
+    for(string k:paths){
+       if(k==paths[paths.size()-1]){
+           cout<<k<<"]";
+       }
+           else{
+            cout<<k<<", ";
+       }
+       
+    
+    }
+    if(n==0){
+           cout<<"]";
+       }
+    
+    return 0;
+}
