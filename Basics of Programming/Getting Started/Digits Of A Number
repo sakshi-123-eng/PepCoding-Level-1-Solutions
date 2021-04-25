@@ -1,0 +1,28 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/getting-started/digits-of-a-number-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+	long int n,rev=0;
+	cin>>n;
+	long int t=n;
+	while(n){
+		long int r=n%10;
+	    rev = rev *10 +r;
+		n=n/10;
+	}
+	while(rev){
+		long int r=rev%10;
+		rev=rev/10;
+        cout<<r<<"\n";
+	}
+	while(t%10 ==0){
+		cout<<"0"<<"\n";
+		t=t/10;
+	}
+	
+	return 0;
+}
