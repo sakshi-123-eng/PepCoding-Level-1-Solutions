@@ -1,0 +1,28 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/arrange-buildings-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+int main(){
+    long int n;
+    cin>>n;
+    
+    long int old_count_buildings = 1;
+    long int old_count_spaces = 1;
+    
+    for(int i=2;i<=n;i++){
+        long int new_count_buildings = old_count_spaces ;
+        long int new_count_spaces = old_count_spaces + old_count_buildings;
+        
+        old_count_spaces = new_count_spaces;
+        old_count_buildings = new_count_buildings ;
+    }
+    long int total  = old_count_spaces +  old_count_buildings ; //  total (road_one_side_buildings)
+    long long int result = total*total;
+    // long int result = pow(total , 2);
+    cout<<result ;
+    return 0;
+}
