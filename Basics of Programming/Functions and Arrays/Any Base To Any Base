@@ -1,0 +1,38 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/function-and-arrays/any-base-to-any-base-official/ojquestion#!
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+int BasetoD(int n , int b1){
+	int s=0,c=0;
+	while(n){
+		int r=n%10;
+		s=r*int(pow(b1,c))+s;
+		n=n/10;
+		c++;
+	}
+	return s;
+}
+void DtoBase(int s ,int b2){
+	int c=0,p=0;
+	while(s){
+		int r=s%b2;
+		p=r*int(pow(10,c))+p;
+		s=s/b2;
+		c++;
+	}
+	cout<<p;
+	
+}
+int main(){
+	int n,b1,b2;
+	cin>>n;
+	cin>>b1; cin>>b2;
+	int s= BasetoD(n ,b1);
+	DtoBase(s ,b2);
+	
+	
+	return 0;
+}
