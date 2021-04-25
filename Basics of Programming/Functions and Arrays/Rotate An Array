@@ -1,0 +1,46 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/function-and-arrays/rotate-an-array-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+void reverse(int a[],int i, int j){
+	int li=i;
+	int ri=j;
+	while(li<ri){
+		int temp=a[li];
+		a[li]=a[ri];
+		a[ri]=temp;
+		li++;
+		ri--;
+	}
+	
+}
+void rotate(int a[],int k,int n){
+	k= k%n;
+	if(k<0){
+		k=k+n;
+	}
+	// part 1
+	reverse(a,0,n-k-1);
+	// part 2
+	reverse(a,n-k,n-1);
+	// part 3
+	reverse(a,0,n-1);
+}
+
+int main(){
+	int n,k;
+	cin>>n;
+	int a[n];
+	for(int i=0;i<n;i++){
+		cin>>a[i];
+	}
+	cin>>k;
+	rotate(a,k,n);
+	for(int i=0;i<n;i++){
+		cout<<a[i]<<" ";
+	}
+	return 0;
+}
