@@ -1,0 +1,55 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/string,-string-builder-and-arraylist/string-compression-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h> 
+#include<string>
+using namespace std; 
+void firstc(string str){
+	string s;
+	int n=str.length()-1;
+	for(int i=0;i<n;i++){
+		if(str[i]!=str[i+1]){
+			s=s+str[i];
+		}
+	}
+	if(str[n-1]!=str[n] || str[n-1]==str[n]){
+		s=s+str[n];
+	}
+	cout<<s<<"\n";
+}
+
+void secondc(string str){
+	string s;
+	int n=str.length()-1,c=0;
+	for(int i=0;i<n;i++){
+		if(str[i]==str[i+1]){
+			c++;
+		}
+		if(str[i]!=str[i+1]){
+			s=s+str[i];
+			if(c+1>1){
+				c=c+1;
+				string s1= to_string(c);
+				s=s+ s1;
+				c=0;
+			}
+		}
+	}
+	if(str[n-1]!=str[n]){
+		s=s+str[n];
+	}
+	else if(str[n-1]==str[n]){
+	    s=s+str[n]+to_string(c+1);
+	}
+	cout<<s<<"\n";
+}
+
+int main(){
+	string s;
+	cin>>s;
+	firstc(s);
+	secondc(s);
+	return 0;
+}
