@@ -1,0 +1,26 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/function-and-arrays/any-base-addition-official/ojquestion#!
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int b,n1,n2,rv=0,c=0,p=1;
+	cin>>b;
+	cin>>n1;
+	cin>>n2;
+	while(n1>0 || n2>0|| c>0){
+		int d1=n1%10;
+		int d2 = n2%10;
+		n1=n1/10;
+		n2=n2/10;
+		int d = d1+d2+c;
+		c=d/b;
+		d=d%b;
+		rv+= d*p;
+		p=p*10;
+	}
+	cout<<rv;
+	return 0;
+}
