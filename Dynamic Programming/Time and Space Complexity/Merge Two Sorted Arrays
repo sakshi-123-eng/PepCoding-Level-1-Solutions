@@ -1,0 +1,58 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/time-and-space-complexity/merge-two-sorted-arrays-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n1;
+    cin>>n1;
+    int arr1[n1];
+    for (int i = 0; i < n1; i++)
+    {
+       cin>>arr1[i]; /* code */
+    }
+    int n2;
+    cin>>n2;
+    int arr2[n2];
+    for (int i = 0; i < n2; i++)
+    {
+       cin>>arr2[i]; /* code */
+    }
+    int n=n1+n2;
+    int arr[n];
+    int i=0,j=0,k=0;
+    
+    while(i<n){
+        if(j<n1&&k<n2)
+        {
+        if(arr1[j]<arr2[k]){
+            arr[i]=arr1[j];
+            j++;
+            i++;
+        }else{
+            arr[i]=arr2[k];
+            k++;
+            i++;
+        }
+        }else{
+            if(j<n1){
+                 arr[i]=arr1[j];
+            j++;
+            i++;
+            }
+            else if(k<n2){
+               arr[i]=arr2[k];
+            k++;
+            i++; 
+            }
+        }
+    }
+
+   for (int i = 0; i < n; i++)
+    {
+       cout<<arr[i]<<endl; /* code */
+    }
+    
+ }
