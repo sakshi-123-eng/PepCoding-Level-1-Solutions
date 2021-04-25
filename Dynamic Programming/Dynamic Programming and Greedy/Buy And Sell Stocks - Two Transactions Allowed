@@ -1,0 +1,56 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/buy-sell-stocks-tta-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    
+    int mpist = 0; // mpist = max profit if sold today
+    int leastsf = arr[0]; // leastsf = least so far
+    int dpl[n]={ 0 };
+    for(int i=1;i<n;i++){
+        if(arr[i]<leastsf){
+            leastsf = arr[i];
+        }
+        
+        mpist = arr[i]-leastsf;
+        if(mpist > dpl[i-1]){
+            dpl[i]=mpist;
+        }else{
+            dpl[i]=dpl[i-1];
+        }
+    }
+    int mpibt = 0; // maximum profit if bought today
+    int maxat = arr[n-1]; // max after today
+    int dpr[n] = { 0 };
+    for(int i=n-2;i>=0;i--){
+        if(arr[i] > maxat){
+            maxat = arr[i];
+        }
+        mpibt = maxat - arr[i];
+        if(mpibt> dpr[i+1]){
+            dpr[i]= mpibt;
+        }else{
+            dpr[i]=dpr[i+1];
+        }
+    }
+    
+    int op = 0; 
+    for(int i=0;i<n;i++){
+        if(dpl[i]+dpr[i] > op){
+            op = dpl[i] + dpr[i];
+        }
+    }
+    
+    cout<<op;
+    
+    return 0;
+}
