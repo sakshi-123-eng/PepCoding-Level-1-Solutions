@@ -1,0 +1,99 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/linked-lists/merge-two-sorted-linked-lists-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include <sstream> 
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+};
+class LinkedList{
+    public:
+    Node* head;
+    Node* tail;
+    int sizee;
+    
+    LinkedList(){
+        head=NULL;
+        tail = NULL;
+        sizee = 0;
+    }
+
+    void addLast(int val) {
+        Node* temp = new Node();
+        temp->data = val;
+        temp->next = NULL;
+        
+        if(sizee==0){
+            head = temp;
+            tail = temp;
+        }else{
+            tail->next = temp;
+            tail=temp;
+        }
+        sizee++;
+    }
+    void display(){
+      for (Node* temp = head; temp != NULL; temp = temp->next) {
+            cout<<temp->data<<" ";
+        }  
+        cout<<"\n";
+    }
+    LinkedList mergeTwoSortedLists(LinkedList l1, LinkedList l2) {
+        Node* one = l1.head;
+        Node* two = l2.head;
+        
+        LinkedList res;
+        
+        while(one!=NULL && two!=NULL){
+            if(one->data < two->data){
+                res.addLast(one->data);
+                one=one->next;
+            }else{
+                res.addLast(two->data);
+                two=two->next;
+            }
+        }
+        while(one!=NULL){
+                res.addLast(one->data);
+                one=one->next;
+        }
+        
+        while(two!=NULL){
+                res.addLast(two->data);
+                two=two->next;
+        }
+        return res;
+    }
+    
+    
+};
+
+int main(){
+    LinkedList l1,l2;
+    int n1,n2,val;
+    cin>>n1;
+    for(int i=0;i<n1;i++){
+        cin>>val;
+        l1.addLast(val);
+    }
+    cin>>n2;
+    for(int i=0;i<n2;i++){
+        cin>>val;
+        l2.addLast(val);
+    }
+    
+        
+        
+       LinkedList merged = merged.mergeTwoSortedLists(l1, l2);
+        merged.display();
+        l1.display();
+        l2.display();
+        
+    return 0;
+}
