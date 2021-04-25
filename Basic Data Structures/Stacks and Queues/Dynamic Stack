@@ -1,0 +1,150 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/dynamic-stack-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+class CustomStack
+{
+private:
+    int *arr;
+    int tos;
+
+    int capacity;
+
+public:
+    CustomStack(int cap)
+    {
+        arr = new int[cap];
+        capacity = cap;
+        tos = -1;
+    }
+
+    int size()
+    {
+        return tos + 1; // write ur code here
+    }
+
+    void display()
+    {
+        for (int i = tos; i >= 0; i--)
+        {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+        // write ur code here
+    }
+
+    void push(int val)
+    {
+        if (tos  != capacity-1)
+        {
+            tos++;
+            arr[tos] = val;
+        }
+        else if(tos == capacity-1)
+        {
+            int *p = new int(capacity+capacity);
+            for(int i=0;i<capacity;i++){
+                p[i]=arr[i];
+            }
+            p[capacity]=val;
+            capacity= capacity+capacity;
+            arr = p;
+            tos++;
+        }
+    }
+
+    int pop()
+    {
+        if (tos > -1)
+        {
+            int x=tos;
+            tos--;
+            return arr[x];
+        }
+        else
+        {
+            cout << "Stack underflow"<<endl;
+            return -1;
+        }
+    }
+
+    int top()
+    {
+        if (tos > -1)
+        {
+           
+            return arr[tos];
+        }
+        else
+        {
+            cout << "Stack underflow"<<endl;
+            return -1;
+        }
+    }
+};
+
+int main()
+{
+    int n;
+    cin >> n;
+   
+     string str;
+   
+     
+    
+    CustomStack st(n);
+
+     getline(cin,str);
+   
+    while (str!="quit")
+    {
+        if (str.find("push") == 0)
+        {
+            int i = 0;
+            while (str[i] != ' ')
+            {
+                i++;
+            }
+            i++;
+            string data = "";
+            for (int k = i; k < str.length(); k++)
+            {
+                data = data + str[k];
+            }
+
+            int val = stoi(data);
+            st.push(val);
+        }
+        else if (str.find("pop") == 0)
+        {
+            int val = st.pop();
+            if (val != -1)
+            {
+                cout << val<<endl;
+            }
+        }
+        else if (str.find("top") == 0)
+        {
+            int val = st.top();
+            if (val != -1)
+            {
+                cout << val<<endl;
+            }
+        }
+        else if (str.find("size") == 0)
+        {
+            cout << st.size()<<endl;
+        }
+        else if (str.find("display") == 0)
+        {
+            st.display();
+        }
+        
+         getline(cin,str);
+        
+      
+    }
+}
