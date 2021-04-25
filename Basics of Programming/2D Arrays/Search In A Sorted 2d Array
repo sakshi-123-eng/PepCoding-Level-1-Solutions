@@ -1,0 +1,33 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/2d-arrays/search-in-a-sorted-2d-array-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h> 
+using namespace std;
+int main(){
+	int n,x,kp=0;
+	cin>>n;
+	int a[n][n];
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			cin>>a[i][j];
+		}
+	}
+	cin>>x;
+	int i=0,j=0;
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			if(x==a[i][j]){
+				cout<<i<<"\n"<<j;
+				kp=1;
+				break;
+			}
+		}
+	}
+	if(kp==0){
+		cout<<"Not Found";
+	}
+	
+	return 0;
+}
