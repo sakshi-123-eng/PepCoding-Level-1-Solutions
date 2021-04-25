@@ -1,0 +1,63 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/prefix-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int operation(int v1 , int v2 , char op){
+    if(op == '+'){
+        return (v1+v2);
+    }else if(op == '-'){
+        return (v1-v2);
+    }else if(op == '*'){
+        return (v1*v2);
+    }else if(op == '/'){
+        return (v1/v2);
+    }
+}
+
+int main()
+{
+    string exp;
+    getline(cin, exp);
+    stack<int> vs;
+    stack<string> is;
+    stack<string> ps;
+    for (int i = exp.length()-1; i >= 0; i--)
+    {
+        char ch = exp[i];
+        if(ch == '+' || ch == '-' || ch == '*' || ch == '/' ){
+            int v1 = vs.top();
+            vs.pop();
+            int v2 = vs.top();
+            vs.pop();
+            int val = operation(v1,v2,ch);
+            vs.push(val);
+            
+            string iv1 = is.top();
+            is.pop();
+            string iv2 = is.top();
+            is.pop();
+            string ival = "(" + iv1 + ch + iv2 +")" ;
+            is.push(ival);
+            
+            string pv1 = ps.top();
+            ps.pop();
+            string pv2 = ps.top();
+            ps.pop();
+            string pval =  pv1 + pv2 + ch ;
+            ps.push(pval);
+        }else{
+            vs.push(ch-'0');
+            string s;
+            s.push_back(ch);
+            is.push(s);
+            ps.push(s);
+        }
+        
+    }
+    cout<<vs.top()<<"\n"<<is.top()<<"\n"<<ps.top();
+    return 0;
+}
