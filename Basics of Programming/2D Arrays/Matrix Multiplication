@@ -1,0 +1,49 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/2d-arrays/matrix-multiplication-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+	int n,m,n1,m1;
+	cin>>n>>m;
+	int a1[n][m];
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+			cin>>a1[i][j];
+		}
+	}
+	cin>>n1>>m1;
+	int a2[n1][m1];
+	for(int i=0;i<n1;i++){
+		for(int j=0;j<m1;j++){
+			cin>>a2[i][j];
+		}
+	}
+	if(m!=n1){
+		cout<<"Invalid input";
+	}
+	else{
+	
+	int a3[n][m1];
+	for(int i=0;i<n;i++){
+		int j=0;
+		while(j<m1){
+			int sum=0;
+			for(int k=0;k<m;k++){
+				sum=sum+a1[i][k]*a2[k][j];
+			}
+			a3[i][j]=sum;
+			j++;
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m1;j++){
+			cout<<a3[i][j]<<" ";
+		}
+		cout<<"\n";
+	}
+}
+	return 0;
+}
