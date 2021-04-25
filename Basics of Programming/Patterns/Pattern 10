@@ -1,0 +1,44 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/patterns/design-pattern-10-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	int sp=n/2,st=0,spt=0;
+	for(int i=1;i<=n;i++){
+	for(int j=1;j<=sp;j++){
+		cout<<"	";
+	}
+	cout<<"*	";
+	for(int j=1;j<=spt-1;j++){
+		cout<<"	";
+	}
+	for(int j=1;j<=st;j++){
+		cout<<"*	";
+    }
+	
+	if( i==n-1){
+		st=0;
+	}
+	else{
+		st=1;
+	}
+		
+   if(i<=n/2){
+	     sp--;
+	     spt=spt+2;
+	
+    }
+    else{
+	      sp++;
+	       spt=spt-2;
+     }
+
+      cout<<"\n";	
+      }
+	return 0;
+}
