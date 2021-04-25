@@ -1,0 +1,62 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/paint-house-many-colors-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h> 
+using namespace std;
+// time complexity = O(n^2) , optimised way 
+int main(){
+    int n,c;
+    cin>>n;
+    cin>>c;
+    int arr[n][c];
+    
+    for(int i=0;i<n;i++){
+        for(int j=0;j<c;j++){
+            cin>>arr[i][j];
+        }
+    }
+    
+    int dp[n][c];
+    int least = INT_MAX;
+    int sleast= INT_MAX;
+    
+    for(int j=0;j<c;j++){
+        dp[0][j]=arr[0][j];
+        
+        if(arr[0][j]<=least){
+            sleast = least ;
+            least = arr[0][j];
+        } else if(arr[0][j]<=sleast){
+            sleast = arr[0][j];
+        }
+    }
+    
+    for(int i=1;i<n;i++){
+        int nleast = INT_MAX;
+        int nsleast= INT_MAX;
+        for(int j=0;j<c;j++){
+            if(least == dp[i-1][j]){
+                dp[i][j]=sleast + arr[i][j];
+            }else {
+                dp[i][j]=least + arr[i][j];
+            }
+            
+            
+            if(dp[i][j]<=nleast){
+                nsleast = nleast;
+                nleast = dp[i][j];
+            }else if(dp[i][j]<=nsleast){
+                nsleast = dp[i][j];
+            }
+            
+        }
+        
+        least = nleast ;
+        sleast = nsleast ;
+    }
+    cout<<least;
+    
+    return 0;
+}
