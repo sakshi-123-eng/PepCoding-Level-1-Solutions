@@ -1,0 +1,31 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/introduction-to-recursion/print-increasing-decreasing-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+
+int count=0;
+void printInc(int n){
+	count++;
+	if(count>n){
+		return ;
+	}
+	cout<<count<<"\n";
+	printInc(n);
+}
+void printDec(int n){
+	if(n<1){
+		return ;
+	}
+	cout<<n<<"\n";
+	printDec(n-1);
+}
+int main(){
+	int n;
+	cin>>n;
+	printDec(n);
+	printInc(n);
+	return 0;
+}
