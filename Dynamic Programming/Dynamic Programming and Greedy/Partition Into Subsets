@@ -1,0 +1,35 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/partition-into-subsets-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+    int n,k;
+    cin>>n;
+    cin>>k;
+    
+    if(n==0 || k==0 || n<k){
+        cout<<"0";
+        return 0;
+    }
+    
+    long int dp[k+1][n+1];
+    for(int p=0;p<=n;p++){
+        dp[0][p]=0;
+    }
+    for(int t=1;t<=k;t++){
+        for(int p=1;p<=n;p++){
+            if(p<t){
+                dp[t][p]=0;
+            }else if(p==t){
+                dp[t][p]=1;
+            }else{
+                dp[t][p]= dp[t-1][p-1] + dp[t][p-1]*t;
+            }
+        }
+    }
+    cout<<dp[k][n];
+    return 0;
+}
