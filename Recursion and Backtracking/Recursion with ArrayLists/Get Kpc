@@ -1,0 +1,49 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/recursion-with-arraylists/get-kpc-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+static string codes[]={".;","abc","def","ghi","jkl","mno","pqrs","tu","vwx","yz"};
+
+vector<string> getKPC(string str){
+    if(str.length()==0){
+        vector<string>bres = {""};
+        return bres;
+    }
+    
+    char ch=str.at(0);
+    string ros = str.substr(1);
+    
+    vector<string> rres= getKPC(ros);
+    vector<string> mres;
+    
+    string codeforch = codes[ch - '0'];
+    for(int i=0;i<codeforch.length();i++){
+        char chcode = codeforch.at(i);
+        for(string rstr: rres){
+            mres.push_back(chcode+rstr);
+        }
+    }
+    return mres;
+}
+
+int main(){
+    string str;
+    cin>>str;
+    
+    vector<string> words = getKPC(str);
+    cout<<"[";
+    
+    for(string k:words){
+       if(k==words[words.size()-1]){
+           cout<<k<<"]";
+       }else{
+            cout<<k<<", ";
+       }
+    
+    }
+    
+    return 0;
+}
