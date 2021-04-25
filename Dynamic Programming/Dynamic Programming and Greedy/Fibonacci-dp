@@ -1,0 +1,33 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/fibonacci-dp-official/ojquestion
+
+Code:-
+
+
+#include <iostream>
+using namespace std;
+// Use of Dp
+int fibMemoized(int n, int qb[]){
+    // write your code here
+    if(n==0 || n==1){
+        return n;
+    }
+    if(qb[n]!=0){
+        return qb[n];
+    }
+    
+    int x=fibMemoized(n-1,qb);
+    int y=fibMemoized(n-2,qb);
+    int fibn = x+y;
+    
+    qb[n]= fibn;
+    return fibn;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int p[n+1]={ 0 };
+    cout<<fibMemoized(n,p)<<endl;
+    return 0;
+}
