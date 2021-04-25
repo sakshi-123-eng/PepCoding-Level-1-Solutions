@@ -1,0 +1,39 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/zero-one-knapsack-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+    int n,cap;
+    cin>>n;
+    int vals[n],wts[n];
+    for(int i=0;i<n;i++){
+        cin>>vals[i];
+    }
+    for(int i=0;i<n;i++){
+        cin>>wts[i];
+    }
+    cin>>cap;
+    int dp[n+1][cap+1]={ 0 };
+    for(int i=0;i<n+1;i++){
+        for(int j=0;j<cap+1;j++){
+             if(i==0 || j==0){
+                   dp[i][j]  = 0;    }
+            else if(j>=wts[i-1]){
+                int rcap = j-wts[i-1];
+                
+                if(dp[i-1][rcap]+vals[i-1] > dp[i-1][j]){
+                    dp[i][j]=dp[i-1][rcap]+vals[i-1];
+                }else{
+                    dp[i][j]= dp[i-1][j]; // when i doesn't bat
+                }
+            }else{
+                dp[i][j]= dp[i-1][j]; // when i doesn't bat
+            }
+        }
+    }
+    cout<<dp[n][cap];
+    return 0;
+}
