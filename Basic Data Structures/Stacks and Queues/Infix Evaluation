@@ -1,0 +1,100 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/infix-evaluation-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int precedence(char optor){
+    if(optor == '+'){
+        return 1;
+    }else if(optor == '-'){
+        return 1;
+    }else if(optor == '*'){
+        return 2;
+    }else if(optor == '/'){
+        return 2;
+    }
+}
+
+int operation(int v1, int v2 , char optor){
+    if(optor == '+'){
+        return (v1 + v2);
+    }else if(optor == '-'){
+        return (v1 - v2);
+    }else if(optor == '*'){
+        return (v1 * v2);
+    }else if(optor == '/'){
+        return (v1 / v2);
+    }
+}
+
+int main(){
+    string expp;
+    getline(cin,expp);
+    
+    // code
+    stack<int>opnds;
+    stack<char>optors;
+    
+    
+    for(int i=0;i<expp.length();i++){
+        char ch = expp.at(i);
+        
+        if(ch =='('){
+            optors.push(ch);
+        } else if(isdigit(ch)){
+            opnds.push(ch-'0');
+        } else if(ch ==')'){
+            while(optors.top() !='('){
+                char optor = optors.top();
+                optors.pop();
+                int v2 = opnds.top();
+                opnds.pop();
+                int v1 = opnds.top();
+                opnds.pop();
+                
+                int opv = operation(v1,v2,optor);
+                opnds.push(opv);
+                
+            }
+                optors.pop();
+        }else if(ch =='+' || ch =='-' || ch=='*' || ch=='/'){
+            while(optors.size() >0 && optors.top() != '(' && precedence(ch)<= precedence(optors.top())){
+               // char optor = optors.pop();
+               // int v2 = opnds.pop();
+               //int v1 = opnds.pop();
+                
+                char optor = optors.top();
+                optors.pop();
+                int v2 = opnds.top();
+                opnds.pop();
+                int v1 = opnds.top();
+                opnds.pop();
+                
+                
+                int opv = operation(v1,v2,optor);
+                opnds.push(opv);
+                
+            }
+               optors.push(ch);
+        }
+    }
+    
+    while(optors.size() != 0){
+        char optor = optors.top();
+                optors.pop();
+                int v2 = opnds.top();
+                opnds.pop();
+                int v1 = opnds.top();
+                opnds.pop();
+                
+                int opv = operation(v1,v2,optor);
+                opnds.push(opv);
+                
+    }
+    cout<<opnds.top();
+    
+    return 0;
+}
