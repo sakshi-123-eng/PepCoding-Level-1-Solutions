@@ -1,0 +1,47 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/recursion-with-arraylists/get-subsequence-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+vector<string> print(string str){
+    
+     if(str.length()==0){
+     vector<string> store={""};
+     return store;
+   }
+    
+  char s=str[0];
+   string sub=str.substr(1);
+    vector<string>part=print(sub);
+    
+    vector<string>store;
+    for(string k:part){
+      store.push_back(""+k);
+    }
+    for(string k:part){
+      store.push_back(s+k);
+    }
+    return store;
+}
+
+int main(){
+    string str;
+    getline(cin,str);
+    
+    
+    vector<string>final= print (str);
+    cout<<"[";
+     for(string k:final){
+       if(k==final[final.size()-1]){
+           cout<<k<<"]";
+       }else{
+            cout<<k<<", ";
+       }
+    
+    }
+    
+    
+    
+}
