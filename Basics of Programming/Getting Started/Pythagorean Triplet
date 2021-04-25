@@ -1,0 +1,28 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/getting-started/pythagorean-triplet-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+using namespace std;
+int main(){
+	long int a,b,c,d=2;
+	cin>>a>>b>>c;
+	if(pow(a,d) == pow(b,d)+pow(c,d)){
+		cout<<"true";
+	}
+	else if(pow(b,d) == pow(c,d)+pow(a,d) ){
+		cout<<"true";
+	}
+	else if(pow(c,d) == pow(a,d)+pow(b,d) ){
+		cout<<"true";
+	}
+	else{
+	    cout<<"false";
+	}
+	
+	
+	return 0;
+}
