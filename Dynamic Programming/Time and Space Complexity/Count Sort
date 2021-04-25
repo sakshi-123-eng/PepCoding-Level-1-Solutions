@@ -1,0 +1,46 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/time-and-space-complexity/count-sort-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h> 
+using namespace std;
+void countSort(int arr[],int n,int min , int max){
+    int range = max-min+1;
+    int farr[range] = { 0 };
+    
+    for(int i=0;i<n;i++){
+        int idx = arr[i]-min;
+        farr[idx]++;
+    }
+    for(int i=1;i<range;i++){
+        farr[i]=farr[i]+farr[i-1];
+    }
+    
+    int ans[n];
+    for(int i=n-1;i>=0;i--){
+        int val=arr[i];
+        int pos=farr[val-min];
+        int idx=pos-1;
+        ans[idx]=val;
+        farr[val-min]--;
+    }
+    for(int i=0;i<n;i++){
+        arr[i]=ans[i];
+    }
+}
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int min = *min_element(arr,arr+n);
+    int max = *max_element(arr,arr+n);
+    countSort(arr,n,min,max);
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<"\n";
+    }
+    return 0;
+}
