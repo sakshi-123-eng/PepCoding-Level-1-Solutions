@@ -1,0 +1,121 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/infix-conversions-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int precedence(char op)
+{
+    if (op == '+')
+    {
+        return 1;
+    }
+    if (op == '-')
+    {
+        return 1;
+    }
+    if (op == '*')
+    {
+        return 2;
+    }
+    if (op == '/')
+    {
+        return 2;
+    }else{
+        return 0;
+    }
+}
+
+int main()
+{
+    string exp;
+    getline(cin, exp);
+    stack<string> prefix;
+    stack<char> opratrs;
+    stack<string> postfix;
+    for (int i = 0; i < exp.length(); i++)
+    {
+        if (exp[i] == '(')
+        {
+            opratrs.push(exp[i]);
+        }
+        else if ((exp[i] >='0' && exp[i] <= '9') || (exp[i] >='a' && exp[i] <= 'z') || (exp[i] >='A' && exp[i] <= 'Z'))
+        {
+            string  s;
+            s.push_back(exp[i]);
+            prefix.push(s);
+            postfix.push(s);
+        }
+        else if (exp[i] == ')')
+        {
+            while (opratrs.top() !='(')
+            {
+                char op = opratrs.top();
+                opratrs.pop();
+                string vr2 = prefix.top();
+                prefix.pop();
+
+                string vr1 = prefix.top();
+                prefix.pop();
+
+                prefix.push(op + vr1 + vr2);
+                
+                string vo2 = postfix.top();
+                postfix.pop();
+
+                string vo1 = postfix.top();
+                postfix.pop();
+
+                postfix.push(vo1 + vo2 + op);
+            }
+
+            opratrs.pop();
+        }
+        else if (exp[i] == '+' || exp[i] == '-' || exp[i] == '*' || exp[i] == '/')
+        {
+            while (opratrs.size() > 0 && opratrs.top() != '(' && precedence(exp[i]) <= precedence(opratrs.top()))
+            {
+                char op = opratrs.top();
+                opratrs.pop();
+                string vr2 = prefix.top();
+                prefix.pop();
+
+                string vr1 = prefix.top();
+                prefix.pop();
+
+                prefix.push(op + vr1 + vr2);
+                string vo2 = postfix.top();
+                postfix.pop();
+
+                string vo1 = postfix.top();
+                postfix.pop();
+
+                postfix.push(vo1 + vo2 + op);
+            }
+            opratrs.push(exp[i]);
+        }
+    }
+    while (opratrs.size() > 0)
+    {
+        char op = opratrs.top();
+        opratrs.pop();
+        string vr2 = prefix.top();
+        prefix.pop();
+
+        string vr1 = prefix.top();
+        prefix.pop();
+
+        prefix.push(op + vr1 + vr2);
+        string vo2 = postfix.top();
+        postfix.pop();
+
+        string vo1 = postfix.top();
+        postfix.pop();
+
+        postfix.push(vo1 + vo2 + op);
+    }
+    cout 
+         << postfix.top() << endl<< prefix.top();
+}
