@@ -1,0 +1,26 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/introduction-to-recursion/power-logarithmic-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+
+int powerr(int x,int n){
+	if(n==0){
+		return 1;
+	}
+	int xpnb2 = powerr(x,n/2);
+	int xn = xpnb2 * xpnb2;
+	
+	if(n%2==1){
+		xn=x * xn;
+	}
+	return xn;
+}
+int main(){
+	int n,x;
+	cin>>x>>n;
+	cout<<powerr(x,n);
+	return 0;
+}
