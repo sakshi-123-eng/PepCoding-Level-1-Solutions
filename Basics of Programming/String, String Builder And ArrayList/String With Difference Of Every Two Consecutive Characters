@@ -1,0 +1,27 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/string,-string-builder-and-arraylist/string-with-difference-of-every-two-consecutive-characters-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h> 
+#include<string>
+using namespace std;
+int main(){
+    string s,s1;
+    cin>>s;
+    s1=s[0];
+    for(int i=0;i<s.length()-1;i++){
+        int a= s[i];
+        int b= s[i+1];
+        int c=b-a;
+        if(i>0){
+            s1=s1+s[i]+to_string(c);
+        }
+        else{
+            s1=s1+to_string(c);
+        }
+    }
+    cout<<s1+s[s.length()-1];
+    
+    return 0;
+}
