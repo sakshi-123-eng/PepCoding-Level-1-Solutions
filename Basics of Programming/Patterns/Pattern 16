@@ -1,0 +1,41 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/patterns/design-pattern-16-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h> 
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	int st=1, sp=2*n-3;
+	for(int i=1;i<=n;i++){
+		int val=1;
+		for(int j=1;j<=st;j++){
+			cout<<val<<"	";
+			val++;
+		}
+		for(int j=1;j<=sp;j++){
+			cout<<"	";
+		}
+		if(i!=n){
+		int cval=i;
+		for(int j=1;j<=st;j++){
+			cout<<cval<<"	";
+			cval--;
+		}	
+		}
+		else if(i==n){
+			int cval=i-1;
+		for(int j=1;j<st;j++){
+			cout<<cval<<"	";
+			cval--;
+		}
+		}
+		
+		sp= sp-2;
+		st++;
+		cout<<"\n";
+	}
+	return 0;
+}
