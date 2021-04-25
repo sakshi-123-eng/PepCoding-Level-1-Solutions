@@ -1,0 +1,11 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/getting-started/print-z-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+	cout<<"*****"<<"\n"<<"   *"<<"\n"<<"  *"<<"\n"<<" *"<<"\n"<<"*****";
+	return 0;
+}
