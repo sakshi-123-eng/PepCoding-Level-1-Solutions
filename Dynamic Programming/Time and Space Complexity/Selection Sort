@@ -1,0 +1,52 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/time-and-space-complexity/selection-sort-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+void swap(int arr[], int i, int j) {
+    cout << "Swapping " << arr[i] << " and " << arr[j] << endl;
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+    
+}
+bool compare(int arr[], int i, int j) {
+    cout << "Comparing " << arr[i] << " and " << arr[j] << endl;
+    if (arr[i] < arr[j]) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void Selectionsort(int arr[], int n) {
+    int i, j;
+
+    for (i = 0; i < n - 1; i++) {
+        int min = i;
+        for (j = i + 1; j < n; j++) {
+            if (compare(arr, j, min)) {
+                min =j;
+                //swap(arr, i, min);
+            }
+        }
+        swap(arr, i, min);
+    }
+}
+int main() {
+    int n, a[n];
+    int i, j;
+    cin >> n;
+    for (i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    Selectionsort(a, n);
+    for (i = 0; i < n; i++) {
+        cout << a[i] << endl;
+    }
+    return 0;
+}
