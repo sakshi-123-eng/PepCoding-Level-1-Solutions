@@ -1,0 +1,23 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/getting-started/gcd-and-lcm-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main(){
+	int a,b;
+	cin>>a>>b;
+	int GCD =1,minV=min(a,b);
+	for(int i=2;i<=int(minV/2);i++){
+		if(a%i==0 && b%i==0){
+			GCD = max(GCD,i);
+		}
+	}
+	cout<<GCD<<"\n";
+	int LCM=(a*b)/GCD;
+	cout<<LCM;
+	
+	return 0;
+}
