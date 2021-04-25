@@ -1,0 +1,47 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/time-and-space-complexity/sort-dates-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h> 
+using namespace std;
+void countSort(string arr[],int n,int divv,int mod,int range){
+    int farr[range]={ 0 };
+    for(int i=0;i<n;i++){
+        farr[stoi(arr[i])/divv% mod]++;
+    }
+    for(int i=1;i<range;i++){
+        farr[i]=farr[i]+farr[i-1];
+    }
+    
+    string ans[n];
+    for(int i=n-1;i>=0;i--){
+        int pos=farr[stoi(arr[i])/divv% mod]-1;
+        ans[pos]=arr[i];
+        farr[stoi(arr[i])/divv% mod]--;
+    }
+    for(int i=0;i<n;i++){
+        arr[i]=ans[i];
+    }
+}
+void sortDates(string arr[],int n){
+    countSort(arr,n,1000000,100,32); // days
+    countSort(arr,n,10000,100,13); // months
+    countSort(arr,n,1,10000,2501); // years
+    
+}
+
+
+int main(){
+    int n;
+    cin>>n;
+    string arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    sortDates(arr,n);
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<"\n";
+    }
+    return 0;
+}
