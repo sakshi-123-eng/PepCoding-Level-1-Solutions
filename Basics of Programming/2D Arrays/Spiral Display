@@ -1,0 +1,42 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/2d-arrays/spiral-display-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int m,n;
+    cin>>n>>m;
+    int arr[n][m];
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>arr[i][j];
+        }
+    }
+    int total=n*m;
+    int count=0;
+    int minr=0,minc=0,maxr=n-1,maxc=m-1;
+    while(count<total){
+        for(int i=minr,j=minc;i<=maxr&&count<total;i++){
+            cout<<arr[i][j]<<endl;
+            count++;
+        }
+        minc++;
+         for(int i=maxr,j=minc;j<=maxc&&count<total;j++){
+            cout<<arr[i][j]<<endl;
+             count++;
+        }
+        maxr--;
+         for(int i=maxr,j=maxc;i>=minr&&count<total;i--){
+            cout<<arr[i][j]<<endl;
+             count++;
+        }
+        maxc--;
+         for(int i=minr,j=maxc;j>=minc&&count<total;j--){
+            cout<<arr[i][j]<<endl;
+             count++;
+        }
+        minr++;
+     }
+}
