@@ -1,0 +1,23 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/patterns/design-pattern-13-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h> 
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        int icj=1;
+        for(int j=0;j<=i;j++){
+            cout<<icj<<"	";
+            int k= i-j ;
+            int l= j+1 ;
+            int ipj1 = (icj * k )/l;
+            icj = ipj1;
+        }
+        cout<<"\n";
+    }
+    return 0;
+}
