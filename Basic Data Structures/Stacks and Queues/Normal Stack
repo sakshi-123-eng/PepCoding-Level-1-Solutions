@@ -1,0 +1,111 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/normal-stack-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include <sstream> 
+using namespace std;
+
+class stack{
+    private:
+    int n;
+    int tp ;
+   // int* arr = new int(n); this is wrong way for array memory allocation
+    int *arr;
+    public:
+    stack(int num){
+       arr = new int[num];   // right way for memory allocation
+        tp=-1;
+        n=num;
+    }
+    
+    int size() {
+        return (tp+1);
+        }
+
+        void display() {
+            
+            for(int i=tp;i>=0;i--){
+                cout<< arr[i]<<" ";
+            }
+            cout<<"\n";
+        }
+        void push(int val) {
+            if(tp==n-1){
+                cout<< "Stack overflow"<<"\n";
+            }else{
+                tp++;
+                arr[tp]=val;
+              
+            }
+        }
+
+        int pop() {
+            if(tp==-1){
+                cout<< "Stack underflow"<<"\n";
+                return -1;
+            }else{
+                int topv = arr[tp];
+                arr[tp]=0;
+                tp--;
+                return topv;
+            }
+            
+        }
+
+        int top() {
+            if(tp==-1){
+                cout<< "Stack underflow"<<"\n";
+                return -1;
+            }else{
+                return arr[tp];
+            }
+            
+            
+        }
+    
+};
+int main(){
+    int n ;
+    cin>>n;
+    stack st(n);
+    
+    string str;
+    getline(cin,str);
+    while (str.compare("quit") != 0){
+        istringstream ss(str);
+        
+        string a[2];
+        string word;
+        int i=0;
+        while(ss>>word){
+            a[i]=word;
+            i++;
+        }
+        istringstream sv(a[1]);
+        if(a[0].compare("push")==0){
+            int val;
+            sv>>val;
+            st.push(val);
+        }else if(a[0].compare("pop")==0){
+            int val = st.pop();
+            if(val != -1){
+                cout<<val<<"\n";
+            }
+        }else if(a[0].compare("top")==0){
+            int val = st.top();
+            if(val != -1){
+                cout<<val<<"\n";
+            }
+        }else if(a[0].compare("size")==0){
+            cout<<st.size()<<"\n";
+        }else if(a[0].compare("display")==0){
+            st.display();
+        }
+        getline(cin,str);
+    }
+    
+    
+    return 0;
+}
