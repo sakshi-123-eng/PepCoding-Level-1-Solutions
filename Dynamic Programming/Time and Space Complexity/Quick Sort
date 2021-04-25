@@ -1,0 +1,58 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/time-and-space-complexity/quick-sort-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+int partition(int arr[],int start,int last,int p){
+    cout<<"pivot -> "<<p<<endl;
+    int i=start, j=start;
+    while(i<=last){
+        if(arr[i]>p){
+            i++;
+        }else{
+            cout<<"Swapping "<<arr[i]<<" and "<<arr[j]<<endl;
+            swap(arr[i],arr[j]);
+            i++;
+            j++;
+        }
+
+
+    }
+    cout<<"pivot index -> "<<j-1<<endl;
+    return j-1;
+
+
+
+
+}
+
+void quicksort(int arr[],int start,int last){
+    if(start>last){
+        return;
+    }
+    
+    
+     int p=arr[last];
+     int pi=partition(arr,start,last,p);
+     quicksort(arr,start,pi-1);
+     quicksort(arr,pi+1,last);
+
+
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+      cin>>arr[i];
+    }
+ 
+  quicksort(arr,0,n-1);
+  for(int i=0;i<n;i++){
+      cout<<arr[i]<<" ";
+    }
+ 
+}
