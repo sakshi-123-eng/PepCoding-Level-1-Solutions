@@ -1,0 +1,17 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/getting-started/reverse-a-number-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+	int n,rev=0;
+	cin>>n;
+	while(n){
+	    int r= n%10;
+	    n=n/10;
+	    cout<<r<<"\n";
+	}
+	return 0;
+}
