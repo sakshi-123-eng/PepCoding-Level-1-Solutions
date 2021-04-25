@@ -1,0 +1,34 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/recursion-on-the-way-up/print-kpc-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+string codes[]={".;","abc","def","ghi","jkl","mno","pqrs","tu","vwx","yz"};
+
+void printKPC(string str , string ans){
+    if(str.length()==0){
+        cout<<ans<<"\n";
+        return;
+    }
+    
+    char ch=str.at(0);
+    string roq = str.substr(1);
+    
+    string codeforch = codes[ch - '0'];
+    for(int i=0;i<codeforch.length();i++){
+        char cho = codeforch.at(i);
+        printKPC(roq, ans + cho);
+    }
+}
+
+int main(){
+    string str;
+    cin>>str;
+    
+    printKPC(str,"");
+    
+    
+    return 0;
+}
