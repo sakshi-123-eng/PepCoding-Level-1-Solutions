@@ -1,0 +1,89 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/size-generic-tree-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+#include<vector>
+using namespace std;
+// multisolver method
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+
+void display(Node* node){
+    string str = to_string(node->data) + " -> ";
+    
+    for(Node* child : node->children){
+        str += to_string(child->data)+" , ";
+    }
+    str+= ".";
+    cout<<str<<"\n";
+    
+    for(Node* child : node->children){
+        display(child);
+    }
+}
+
+static int minm;
+static int maxm;
+static int size;
+static int height;
+
+void multiSolver(Node* node , int depth){
+   minm = min(minm,node->data);
+   maxm= max(maxm,node->data);
+   size++;
+   height=max(height,depth);
+   
+   for(Node* child : node->children){
+       multiSolver(child,depth+1);
+   }
+}
+
+int main(){
+    // int arr[]={10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,100,-1,-1,90,-1,-1,40,100,-1,-1,-1};
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+
+    Node* root = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root = t;
+            }
+            
+            st.push(t);
+        }
+    }
+    
+   minm = INT_MAX;
+   maxm= INT_MIN;
+   size=0;
+   height=0;
+   multiSolver(root,0);
+  
+  cout<<size<<"\n";
+    
+    
+    
+    
+    
+    
+    return 0;
+}
