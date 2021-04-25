@@ -1,0 +1,23 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/introduction-to-recursion/print-increasing-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+
+int count=0;
+void printInc(int n){
+	count++;
+	if(count>n){
+		return ;
+	}
+	cout<<count<<"\n";
+	printInc(n);
+}
+int main(){
+	int n;
+	cin>>n;
+	printInc(n);
+	return 0;
+}
