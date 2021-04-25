@@ -1,0 +1,117 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/normal-queue-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include <sstream> 
+using namespace std;
+
+class Queue{
+    private:
+    int* data;
+    int front;
+    int siz;
+    int n;
+
+    public:
+    Queue(int num){
+       data = new int[num];   // right way for memory allocation
+        front =0;
+        siz = 0;
+        n=num;
+        
+    }
+    
+    int size() {
+            return siz;
+        }
+
+        void display() {
+            for(int i=0;i<siz;i++){
+                int idx = (front+i)%n;
+                cout<<data[idx]<<" ";
+            }
+            cout<<"\n";
+        }
+
+        void add(int val) {
+            if(siz==n){
+                cout<<"Queue overflow"<<"\n";
+            }else{
+                int rear = (front + siz)%n;
+                data[rear]=val;
+                siz++;
+            }
+        }
+
+        int remove() {
+            if(siz==0){
+                cout<<"Queue underflow"<<"\n";
+                return -1;
+            }else{
+                int val = data[front];
+                front=(front+1)%n;
+                siz--;
+                return val;
+            }
+            
+        }
+
+        int peek() {
+            if(siz==0){
+                cout<<"Queue underflow"<<"\n";
+                return -1;
+            }else{
+                return data[front];
+            }
+            
+        }
+    
+};
+int main(){
+    int n ;
+    cin>>n;
+    Queue st(n);
+    
+    string str;
+    
+    getline(cin,str);
+    
+    while (str.compare("quit") != 0){
+        istringstream ss(str);
+        
+        string a[2];
+        string word;
+        int i=0;
+        while(ss>>word){
+            a[i]=word;
+            i++;
+        }
+        istringstream sv(a[1]);
+        if(a[0].compare("add")==0){
+            int val;
+            sv>>val;
+            st.add(val);
+        }else if(a[0].compare("remove")==0){
+            int val = st.remove();
+            if(val != -1){
+                cout<<val<<"\n";
+            }
+        }else if(a[0].compare("peek")==0){
+            int val = st.peek();
+            if(val != -1){
+                cout<<val<<"\n";
+            }
+        }else if(a[0].compare("size")==0){
+            cout<<st.size()<<"\n";
+        }else if(a[0].compare("display")==0){
+            st.display();
+        }
+        getline(cin,str);
+        
+    }
+    
+    
+    return 0;
+}
