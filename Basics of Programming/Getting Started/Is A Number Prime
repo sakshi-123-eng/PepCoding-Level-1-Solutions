@@ -1,0 +1,39 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/getting-started/is-number-prime-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+void primeCheck(long int n){
+	long int c=0;
+	if(n==2 || n==3){
+		cout<<"prime";
+	}
+	else{
+		
+	for(long int i=2;i<=int(sqrt(n));i++){
+		if(n%i !=0){
+			c++;
+		}
+	}
+	if(c== int(sqrt(n))-1){
+		cout<<"prime";
+	}
+	else{
+		cout<<"not prime";
+	}
+}
+}
+int main(){
+	long int n;
+	int t;
+	cin>>t;
+	for(int i=0;i<t;i++){
+		cin>>n;
+		primeCheck(n);
+		cout<<"\n";
+	}
+	return 0;
+}
