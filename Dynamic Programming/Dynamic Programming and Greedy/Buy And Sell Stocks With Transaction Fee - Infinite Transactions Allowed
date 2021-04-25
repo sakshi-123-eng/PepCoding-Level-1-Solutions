@@ -1,0 +1,40 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/buy-sell-stocks-transaction-fee-ita-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n,fee;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    cin>>fee;
+    int obsp=-arr[0];
+    int ossp=0;
+    for(int i=1;i<n;i++){
+        int nbsp =0;
+        int nssp =0;
+        if(ossp-arr[i]>obsp){
+            nbsp =ossp-arr[i]; 
+        }else{
+            nbsp = obsp;
+        }
+        
+        if(obsp+arr[i]-fee>ossp){
+            nssp = obsp+arr[i]-fee;
+        }else{
+            nssp = ossp;
+        }
+        
+        obsp=nbsp;
+        ossp=nssp;
+        
+    }
+    cout<<ossp;
+    
+    return 0;
+}
