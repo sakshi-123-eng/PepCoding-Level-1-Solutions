@@ -1,0 +1,190 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/stack-to-queue-adapter-remove-efficient-official/ojquestion
+
+Code:-
+#include<bits/stdc++.h>
+#include <sstream> 
+using namespace std;
+// push efficient 
+class StackToQueueAdapter {
+    private:
+    stack < int > mainQ;
+    stack <int > helperQ;
+
+
+    public:
+     int size() {
+        
+         return mainQ.size();
+        }
+
+        void add(int val) {
+            while(mainQ.size()>0){
+                helperQ.push(mainQ.top());
+                mainQ.pop();
+            }
+            mainQ.push(val);
+            
+            while(helperQ.size()>0){
+                mainQ.push(helperQ.top());
+                helperQ.pop();
+            }
+        }
+
+        int remove() {
+            if(size()==0){
+                cout<<"Queue underflow"<<"\n";
+                return -1;
+            }else{
+                int val= mainQ.top();
+                mainQ.pop();
+                return val;
+            }
+        }
+
+        int peek() {
+            if(size()==0){
+                cout<<"Queue underflow"<<"\n";
+                return -1;
+            }else{
+                return mainQ.top();
+            }
+            
+        }
+    
+};
+int main(){
+    
+    StackToQueueAdapter st;
+    
+    string str;
+    getline(cin,str);
+
+    while (str.compare("quit") != 0){
+        istringstream ss(str);
+        
+        string a[2];
+        string word;
+        int i=0;
+        while(ss>>word){
+            a[i]=word;
+            i++;
+        }
+        istringstream sv(a[1]);
+        if(a[0].compare("add")==0){
+            int val;
+            sv>>val;
+            st.add(val);
+        }else if(a[0].compare("remove")==0){
+            int val = st.remove();
+            if(val != -1){
+                cout<<val<<"\n";
+            }
+        }else if(a[0].compare("peek")==0){
+            int val = st.peek();
+            if(val != -1){
+                cout<<val<<"\n";
+            }
+        }else if(a[0].compare("size")==0){
+            cout<<st.size()<<"\n";
+        }
+        getline(cin,str);
+        
+    }
+    
+    
+    return 0;
+}
+#include<bits/stdc++.h>
+#include <sstream> 
+using namespace std;
+// push efficient 
+class StackToQueueAdapter {
+    private:
+    stack < int > mainQ;
+    stack <int > helperQ;
+
+
+    public:
+     int size() {
+        
+         return mainQ.size();
+        }
+
+        void add(int val) {
+            while(mainQ.size()>0){
+                helperQ.push(mainQ.top());
+                mainQ.pop();
+            }
+            mainQ.push(val);
+            
+            while(helperQ.size()>0){
+                mainQ.push(helperQ.top());
+                helperQ.pop();
+            }
+        }
+
+        int remove() {
+            if(size()==0){
+                cout<<"Queue underflow"<<"\n";
+                return -1;
+            }else{
+                int val= mainQ.top();
+                mainQ.pop();
+                return val;
+            }
+        }
+
+        int peek() {
+            if(size()==0){
+                cout<<"Queue underflow"<<"\n";
+                return -1;
+            }else{
+                return mainQ.top();
+            }
+            
+        }
+    
+};
+int main(){
+    
+    StackToQueueAdapter st;
+    
+    string str;
+    getline(cin,str);
+
+    while (str.compare("quit") != 0){
+        istringstream ss(str);
+        
+        string a[2];
+        string word;
+        int i=0;
+        while(ss>>word){
+            a[i]=word;
+            i++;
+        }
+        istringstream sv(a[1]);
+        if(a[0].compare("add")==0){
+            int val;
+            sv>>val;
+            st.add(val);
+        }else if(a[0].compare("remove")==0){
+            int val = st.remove();
+            if(val != -1){
+                cout<<val<<"\n";
+            }
+        }else if(a[0].compare("peek")==0){
+            int val = st.peek();
+            if(val != -1){
+                cout<<val<<"\n";
+            }
+        }else if(a[0].compare("size")==0){
+            cout<<st.size()<<"\n";
+        }
+        getline(cin,str);
+        
+    }
+    
+    
+    return 0;
+}
