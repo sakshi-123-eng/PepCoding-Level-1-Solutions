@@ -1,0 +1,20 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/patterns/design-pattern-11-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	int s=1;
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=i;j++){
+			cout<<s<<"	";
+			s++;
+		}
+		cout<<"\n";
+	}
+	return 0;
+}
