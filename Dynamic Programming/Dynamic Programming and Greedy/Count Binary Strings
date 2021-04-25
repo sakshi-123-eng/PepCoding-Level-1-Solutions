@@ -1,0 +1,24 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/count-binary-strings-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    
+    int old_count_zeros = 1;
+    int old_count_ones = 1;
+    
+    for(int i=2;i<=n;i++){
+        int new_count_zeros = old_count_ones ;
+        int new_count_ones = old_count_ones + old_count_zeros;
+        
+        old_count_ones = new_count_ones;
+        old_count_zeros = new_count_zeros ;
+    }
+    cout<< old_count_ones +  old_count_zeros;
+    return 0;
+}
