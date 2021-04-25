@@ -1,0 +1,45 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/getting-started/prime-factorisation-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+using namespace std;
+bool primeCheck(long int n){
+	long int c=0;
+	if(n==3){
+		return 1;
+	}
+	else{
+		
+	for(long int i=2;i<=int(sqrt(n));i++){
+		if(n%i !=0){
+			c++;
+		}
+	}
+	if(c== int(sqrt(n))-1){
+		return 1;
+	}
+}
+    return 0;   
+}
+int main(){
+	long int n;
+	cin>>n;
+	if(primeCheck(n)==1){
+		cout<<n<<" ";
+	}
+	else{
+		for(long int i=2;i<=n/2;i++){
+			long int t=n;
+			while(t%i ==0 && primeCheck(i)==1){
+				cout<<i<<" ";
+				t=t/i;
+			}
+		}
+	}
+	
+	return 0;
+	}
