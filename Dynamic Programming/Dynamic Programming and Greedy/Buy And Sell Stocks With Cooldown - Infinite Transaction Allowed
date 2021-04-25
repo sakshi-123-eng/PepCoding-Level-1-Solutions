@@ -1,0 +1,48 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/dynamic-programming-and-greedy/buy-and-sell-stocks-cooldown-ita-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int obsp=-arr[0]; // obsp = old buying state price
+    int ossp=0;  // ossp = old selling state price
+    int ocsp=0; // ocsp = old cooldown state price
+    
+    for(int i=1;i<n;i++){
+        int nbsp =0; // nbsp = new buying state price
+        int nssp =0; // nssp = new selling state price
+        int ncsp=0;  // ncsp = new cooldown state price
+        
+        if(ocsp-arr[i]>obsp){
+            nbsp =ocsp-arr[i]; 
+        }else{
+            nbsp = obsp;
+        }
+        
+        if(obsp+arr[i]>ossp){
+            nssp = obsp+arr[i];
+        }else{
+            nssp = ossp;
+        }
+        if(ossp>ocsp){
+            ncsp=ossp;
+        }else{
+            ncsp=ocsp;
+        }
+        
+        obsp=nbsp;
+        ossp=nssp;
+        ocsp=ncsp;
+    }
+    cout<<ossp;
+    
+    return 0;
+}
