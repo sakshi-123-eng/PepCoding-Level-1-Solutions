@@ -1,0 +1,54 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/stacks-and-queues/celebrity-problem-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    int arr[n][n];
+    for(int i=0;i<n;i++){
+        string line ;
+         cin>>line;
+       // getline(cin,line);    // it's giving wrong answer
+        for(int j=0;j<n;j++){
+            arr[i][j]=line[j]-'0';
+        }
+    }
+    
+    stack<int>st;
+    for(int i=0;i<n;i++){
+        st.push(i);
+    }
+    
+    while(st.size() >= 2){
+        int i= st.top();
+        st.pop();
+        int j= st.top();
+        st.pop();
+        
+        if(arr[i][j]==1 && arr[j][i] ==0){
+            // if i knows j -> i is not a celebraty
+            st.push(j);
+        }else{
+            st.push(i);
+        }
+    }
+     int pot = st.top();
+     st.pop();
+     for(int i=0;i<n;i++){
+         if(i!=pot){
+             if(arr[i][pot]==0 || arr[pot][i]==1){
+                 cout<<"none";
+                 return 0;
+             }
+             
+         }
+     }
+    
+    cout<<pot;
+    
+    return 0;
+}
