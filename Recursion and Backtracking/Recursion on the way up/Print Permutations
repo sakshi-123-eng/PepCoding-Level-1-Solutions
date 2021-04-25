@@ -1,0 +1,31 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/recursion-on-the-way-up/print-permutations-official/ojquestion
+
+Code:-
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void printPermutations(string ques, string asf)
+{
+    if(ques.length()==0){
+        cout<<asf<<"\n";
+        return;
+    }
+    for(int i=0;i<ques.length();i++){
+        char ch= ques.at(i);
+        string lpart= ques.substr(0,i);
+        string rpart= ques.substr(i+1);
+        string roq = lpart + rpart;
+        printPermutations(roq , asf+ch);
+        
+    }
+    
+}
+
+int main(){
+    string str;
+    cin>>str;
+    printPermutations(str,"");
+    return 0;
+}
