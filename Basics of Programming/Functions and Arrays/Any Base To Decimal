@@ -1,0 +1,22 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/function-and-arrays/any-base-to-decimal-official/ojquestion#!
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	// pep Approach
+	int n,b,c=0,s=0;
+	cin>>n;
+	cin>>b;
+	while(n){
+		int r=n%10;
+		s=r*int(pow(b,c))+s;
+		n=n/10;
+		c++;
+	}
+	cout<<s;
+	return 0;
+}
