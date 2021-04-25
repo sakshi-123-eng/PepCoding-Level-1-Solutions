@@ -1,0 +1,44 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/patterns/pattern-type-5-official/ojquestion
+
+Code:-
+
+#include<iostream>
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	int p=0;
+	int t=n;
+	if(n%2!=0){
+	for(int i=n/2;i>=1;i--){
+		for(int j=1;j<=i;j++){
+			cout<<"	";
+		}
+		for(int k=i;k<=int(n/2)+p;k++){
+			cout<<"*"<<"	";
+		}
+		p++;
+		cout<<"\n";
+	}
+	for(int i=1;i<=n;i++){
+		cout<<"*"<<"	";
+	}
+	cout<<"\n";
+	
+	for(int i=1;i<=int(n/2);i++){
+		for(int j=1;j<=i;j++){
+			cout<<"	";
+		}
+		for(int k=1;k<=t-2;k++){
+			cout<<"*"<<"	";
+		}
+		p++;
+		t=t-2;
+		cout<<"\n";
+	}
+	
+}
+	
+	return 0;
+}
