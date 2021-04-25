@@ -1,0 +1,39 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/recursion-on-the-way-up/print-maze-path-with-jumps-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+    void printMazePaths(int sr, int sc, int dr, int dc, string psf) {
+        // write your code here
+        if(sr>dr || sc>dc)
+        {
+            return;
+        }
+        if(sr==dr && sc==dc)
+        {
+            cout<<psf<<endl;
+            return;
+        }
+        for(int ms=1;ms<=dc;ms++)
+        {   char x = '0'+ms;
+            printMazePaths(sr,  sc+ms,  dr,  dc,  psf+'h'+x);
+        }
+        for(int ms=1;ms<=dr;ms++)
+        {   char x = '0'+ms;
+            printMazePaths(sr+ms,  sc,  dr,  dc,  psf+'v'+x);
+        }
+        // ye wala part diagonal wala nhi tha ye karne par submit ho ja rha hae 
+        for(int ms=1;ms<=dc && ms<=dr ;ms++){
+            printMazePaths(sr+ms,sc+ms ,dr, dc,psf+"d"+ to_string(ms));
+        }
+    }
+
+int main() {
+        int n ;
+        int m ;cin>>n>>m;
+        printMazePaths(0, 0, n - 1, m - 1, "");
+    }
