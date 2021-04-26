@@ -1,0 +1,65 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/node-with-maximum-subtree-sum-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+static int msn=0;  // msn = maximum sum node
+static int ms=INT_MIN;   // ms = maximum sum
+
+int retSumAndCalculateMSST(Node* node){
+    int sum =0;
+    
+    for(Node* child : node->children){
+        int csum = retSumAndCalculateMSST(child);
+        sum+=csum;
+    }
+    
+    sum+=node->data;
+    
+    if(sum>ms){
+        msn = node->data;
+        ms = sum;
+    }
+    return sum;
+}
+
+int main(){
+    int n1;
+    // for n1
+    cin>>n1;
+    int arr[n1];
+    for(int i=0;i<n1;i++){
+        cin>>arr[i];
+    }
+    Node* root1 = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n1;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root1 = t;
+            }
+            
+            st.push(t);
+        }
+}
+   retSumAndCalculateMSST(root1);
+   cout<<msn<<"@"<<ms;
+    
+    return 0;
+}
