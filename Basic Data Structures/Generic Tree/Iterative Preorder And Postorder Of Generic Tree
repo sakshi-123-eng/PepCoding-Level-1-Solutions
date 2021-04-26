@@ -1,0 +1,79 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/iterative-preorder-postorder-generic-tree-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+class Pair{
+    public:
+    Node* node;
+    int state;
+    
+    Pair(Node* node, int state){
+        this->node = node;
+        this->state=state;
+    }
+};
+
+void iterativePreAndPostOrderPrint(Node* node){
+    stack<Pair*>st ;
+    st.push(new Pair(node,-1));
+    
+    string pre ="";
+    string post ="";
+    while(st.size()>0){
+        Pair* peek = st.top();
+        if(peek->state==-1){
+            pre+=to_string(peek->node->data)+" ";
+            peek->state++;
+        }else if(peek->state == peek->node->children.size()){
+            post+=to_string(peek->node->data)+" ";
+            st.pop();
+        }else{
+            Pair* cp = new Pair(peek->node->children[peek->state],-1);
+            st.push(cp);
+            
+            peek->state++;
+        }
+    }
+    cout<<pre<<endl;
+    cout<<post<<endl;
+}
+
+int main(){
+    int n1;
+    // for n1
+    cin>>n1;
+    int arr[n1];
+    for(int i=0;i<n1;i++){
+        cin>>arr[i];
+    }
+    Node* root1 = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n1;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root1 = t;
+            }
+            
+            st.push(t);
+        }
+}
+   iterativePreAndPostOrderPrint(root1);
+    return 0;
+}
