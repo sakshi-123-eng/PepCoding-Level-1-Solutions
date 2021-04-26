@@ -1,0 +1,80 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/pred-succ-generic-tree-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+static Node* predecessor;
+static Node* sucessor;
+static int state;
+void predecessorAndSucessor(Node* node,int data){
+    if(state == 0){
+        if(node->data==data){
+            state =1;
+        }else{
+            predecessor=node;
+        }
+    }else if(state == 1){
+        sucessor=node;
+        state = 2;
+    }
+    
+    for(Node* child : node->children){
+        predecessorAndSucessor(child,data);
+    }
+}
+
+
+int main(){
+    int n1;
+    // for n1
+    cin>>n1;
+    int arr[n1];
+    for(int i=0;i<n1;i++){
+        cin>>arr[i];
+    }
+    Node* root1 = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n1;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root1 = t;
+            }
+            
+            st.push(t);
+        }
+}
+    int data;
+    cin>>data;
+    predecessor=NULL;
+    sucessor=NULL;
+    predecessorAndSucessor(root1,data);
+  if (predecessor == NULL) {
+            cout<<"Predecessor = Not found"<<"\n";
+        } else {
+            cout<<"Predecessor = " << predecessor->data<<"\n";
+        }
+
+        if (sucessor == NULL) {
+            cout<<"Successor = Not found"<<"\n";
+        } else {
+            cout<<"Successor = " << sucessor->data<<"\n";
+        }
+    
+    return 0;
+}
