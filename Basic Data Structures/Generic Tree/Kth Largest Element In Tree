@@ -1,0 +1,74 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/kth-largest-element-generic-tree-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+static int cell;
+static int floorr;
+void cellAndFloor(Node* node,int data){
+    if(node->data>data){
+        cell= min(cell,node->data);
+    }else if(node->data<data){
+        floorr=max(floorr,node->data);
+    }
+    
+    for(Node* child : node->children){
+        cellAndFloor(child,data);
+    }
+}
+
+int kthLargest(Node* node,int k){
+    floorr=INT_MIN;
+    int factor = INT_MAX;
+    for(int i=0;i<k;i++){
+        cellAndFloor(node,factor); // will set floor
+        factor = floorr;
+        floorr = INT_MIN;
+        
+    }
+    return factor;
+}
+int main(){
+    int n1;
+    // for n1
+    cin>>n1;
+    int arr[n1];
+    for(int i=0;i<n1;i++){
+        cin>>arr[i];
+    }
+    Node* root1 = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n1;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root1 = t;
+            }
+            
+            st.push(t);
+        }
+}
+    int k;
+    cin>>k;
+    cell=INT_MAX;
+    floorr=INT_MIN;
+    int kthLargestt = kthLargest(root1, k);
+    cout<<kthLargestt;
+    
+    return 0;
+}
