@@ -1,0 +1,36 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/hashmap-and-heap/hfc-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include<string>
+#include<climits>
+#include <unordered_map>
+using namespace std;
+
+int main(){
+    string str;
+    cin>>str;
+    
+    unordered_map<char, int> freq;
+    for(char c : str){
+        if(freq.find(c)==freq.end()){
+            freq.insert({c,0});
+            freq[c]++;
+        }else{
+            freq[c]++;
+        }
+    }
+    int max = INT_MIN;
+    char ch ;
+    for(auto i : freq ){
+        if(i.second > max){
+            max = i.second;
+            ch = i.first;
+        }
+    }
+    
+    cout<<ch<<"\n";
+    return 0;
+}
