@@ -1,0 +1,57 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/hashmap-and-heap/lcqs-official/ojquestion
+
+Code:-
+
+#include<iostream>
+#include<string>
+#include<climits>
+#include <unordered_map>
+using namespace std;
+// pep approach in O(n) time complexity
+int main(){
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+    
+    unordered_map<int, bool>lcs;
+    for(int val : a){
+        lcs.insert({val,true});
+    }
+ 
+ 
+
+    for(int val : a){
+        if(lcs.find(val-1)!= lcs.end()){
+            lcs[val]= false;
+        }
+    }
+
+    
+    int msp =0; // max start point
+    int ml =0;  // max length
+    for(int val : a){
+        if(lcs[val]==true){
+            int tl = 1;  // temporary length
+            int tsp = val; // temporary start point
+            
+            while(lcs.find(tsp+tl)!=lcs.end()){
+                tl++;
+            }
+            
+            if(tl>ml){
+                msp = tsp;
+                ml = tl;
+            }
+        }
+    }
+    
+    
+    for(int i =0;i<ml;i++){
+        cout<<msp+i<<"\n";
+    }
+    return 0;
+}
