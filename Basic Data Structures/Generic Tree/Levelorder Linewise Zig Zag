@@ -1,0 +1,81 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/levelorder-linewise-zigzag-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+#include<vector>
+#include<queue>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+
+void levelOrder(Node* node) {
+    stack<Node*> ms;
+    ms.push(node);
+    int level =1;
+    
+    stack<Node*> cs;
+    stack<Node*> s;
+    
+    while(ms.size()>0){
+        node = ms.top();
+        ms.pop();
+        
+        cout<<node->data<<" ";
+        
+        if(level%2 == 1){
+            for(int i=0;i<node->children.size();i++){
+                   Node* child = node->children[i];
+                   cs.push(child);
+            }
+        }else{
+            for(int i=node->children.size()-1;i>=0;i--){
+                   Node* child = node->children[i];
+                   cs.push(child);
+            }
+        }
+        
+        if(ms.size() == 0 ){
+            ms=cs;
+            cs=s;
+            level++;
+            cout<<"\n";
+        }
+    }
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    Node* root = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root = t;
+            }
+            
+            st.push(t);
+        }
+    }
+    levelOrder(root);
+    
+    return 0;
+}
