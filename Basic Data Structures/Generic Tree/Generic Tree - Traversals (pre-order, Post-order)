@@ -1,0 +1,59 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/generic-tree-traversal-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+#include<vector>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+void traversals(Node* node){
+    // euler's left , on the way deep in the recursion , node's pre area
+    cout<< "Node Pre " << node->data<<"\n";
+    for( Node* child : node->children){
+        // edge pre
+        cout<<"Edge Pre " <<node->data <<"--"<<child->data<<"\n";
+        traversals(child);
+        cout<<"Edge Post " <<node->data <<"--"<<child->data<<"\n";
+        // edge post
+    }
+    cout<< "Node Post " << node->data<<"\n";
+     // euler's right , on the way out of  recursion , node's post area
+}
+
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    Node* root = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root = t;
+            }
+            
+            st.push(t);
+        }
+    }
+    traversals(root);
+    
+    return 0;
+}
