@@ -1,0 +1,154 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/levelorder-linewise-generic-tree-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+#include<vector>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+    Node(){
+        
+    }
+    Node(int data){
+        this->data = data;
+    }
+};
+// double queue based
+void levelOrderLinewise(Node* node) {
+    queue<Node*> mq;
+    mq.push(node);
+    
+    queue<Node*> cq;
+    queue<Node*> q;
+    
+    while(mq.size()>0){
+        node = mq.front();
+        mq.pop();
+        
+        cout<<node->data<<" ";
+        
+        for(Node* child : node->children){
+            cq.push(child);
+        }
+        
+        if(mq.size() == 0){
+            mq=cq;
+            cq=q;
+            cout<<"\n";
+        }
+    }
+}
+// null based 
+
+void levelOrderLinewise1(Node* node){
+    queue<Node*> mq;
+    mq.push(node);
+    mq.push(new Node(-1));
+    
+    while(mq.size()>0){
+        node = mq.front();
+        mq.pop();
+        
+        if(node->data != -1){
+            cout<<node->data<<" ";
+        
+            for(Node* child : node->children){
+                  mq.push(child);
+              }
+        }else{
+            if(mq.size()>0){
+                mq.push(new Node(-1));
+                cout<<"\n";
+            }
+        }
+    }
+}
+// count based
+void levelOrderLinewise2(Node* node){
+    queue<Node*> mq;
+    mq.push(node);
+    
+    while(mq.size()>0){
+        int cicl = mq.size();
+        
+        for(int i=0;i<cicl;i++){
+            node = mq.front();
+            mq.pop();
+            cout<<node->data<<" ";
+            for(Node* child : node->children){
+                  mq.push(child);
+              }
+            
+        }
+        
+        cout<<"\n";
+    }
+}
+// pair based
+class Pair{
+    public:
+    Node* node ;
+    int level;
+    
+    Pair(Node* node, int level){
+        this->level = level ;
+        this->node = node;
+    }
+};
+void levelOrderLinewise3(Node* node){
+    queue<Pair*> mq;
+    mq.push(new Pair(node, 1));
+    
+    int levell = 1;
+    while(mq.size()>0){
+        Pair* p = mq.front();
+        mq.pop();
+        if(p->level > levell){
+            levell = p->level;
+            cout<<"\n";
+        }
+        cout<<p->node->data<<" ";
+        
+        for(Node* child : p->node->children){
+            Pair* cp = new Pair(child,p->level + 1);
+            mq.push(cp);
+        }
+        
+    }
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    Node* root = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root = t;
+            }
+            
+            st.push(t);
+        }
+    }
+    levelOrderLinewise3(root);
+    
+    return 0;
+}
