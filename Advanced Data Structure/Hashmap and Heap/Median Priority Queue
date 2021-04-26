@@ -1,0 +1,105 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/hashmap-and-heap/median-priority-queue-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+ class MedianPriorityQueue {
+    public:
+    priority_queue<int> left;
+    priority_queue<int,vector<int>,greater<int>> right;
+
+    void add(int val) {
+        if(right.size()>0 && val>right.top()){
+            right.push(val);
+        }else{
+            left.push(val);
+        }
+        
+        
+        if(left.size()-right.size() == 2){
+            int v = left.top();
+            left.pop();
+            right.push(v);
+        }else if(right.size()-left.size() == 2){
+            int v = right.top();
+            right.pop();
+            left.push(v);
+        }
+    }
+
+    int remove() {
+        if(this->size()==0){
+            cout<<"Underflow"<<"\n";
+            return -1;
+        }
+        else if(left.size()>= right.size()){
+            int peekk = left.top();
+            left.pop();
+            return peekk;
+        }else{
+            int peekk = right.top();
+            right.pop();
+            return peekk;
+        }
+    }
+
+    int peek() {
+        if(this->size()==0){
+            cout<<"Underflow"<<"\n";
+            return -1;
+        }
+        else if(left.size()>= right.size()){
+            return left.top();
+        }else{
+            return right.top();
+        }
+    }
+
+    int size() {
+         return left.size()+right.size();
+    }
+};
+
+
+int main(){
+    MedianPriorityQueue q;
+    string str;
+    getline(cin,str);
+    while (str.compare("quit") != 0){
+        istringstream ss(str);
+        
+        string a[2];
+        string word;
+        int i=0;
+        while(ss>>word){
+            a[i]=word;
+            i++;
+        }
+        istringstream sv(a[1]);
+        if(a[0].compare("add")==0){
+            int val;
+            sv>>val;
+            q.add(val);
+        }else if(a[0].compare("size")==0){
+            int val=q.size();
+            cout<<val<<"\n";
+        }else if(a[0].compare("peek")==0){
+            int val = q.peek();
+            if(val !=-1){
+                cout<<val<<"\n";
+            }
+        }else if(a[0].compare("remove")==0){
+            int val = q.remove();
+            if(val !=-1){
+                cout<<val<<"\n";
+            }
+        }
+          
+        getline(cin,str);
+    }
+    
+    return 0;
+}
