@@ -1,0 +1,75 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/graphs/hamiltonian-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Edge{
+    public:
+    int src;
+    int nbr;
+    int wt;
+    
+    Edge(int src , int nbr , int wt){
+        this->src = src;
+        this->nbr = nbr;
+        this->wt = wt;
+    }
+    
+};
+
+void hamiltonian(vector<Edge*>graph[],int src , unordered_set<int> &visited , string psf , int osrc , int v){
+    
+    if(visited.size() == v-1){
+        cout<<psf;
+        
+        bool closingEdgeFound = false;
+        for(Edge* e : graph[src]){
+            if(e->nbr ==osrc){
+                closingEdgeFound = true;
+                break;
+            }
+        }
+        if(closingEdgeFound == true){
+            cout<<"*"<<"\n";
+        }else{
+            cout<<"."<<"\n";
+        }
+        
+        
+        return;
+        
+    }
+    
+    visited.insert(src);
+    for(Edge* e : graph[src]){
+        if(visited.find(e->nbr)== visited.end()){
+            hamiltonian(graph ,e->nbr , visited , psf+ to_string(e->nbr), osrc ,v );
+        }
+    }
+    visited.erase(src);
+}
+
+int main(){
+
+      int vtces,edges;
+      cin>>vtces>>edges;
+      vector<Edge*>graph[vtces];
+      for(int i = 0; i < edges; i++){
+         int v1,v2,wt;
+         cin>>v1>>v2>>wt;
+         graph[v1].push_back(new Edge(v1, v2, wt));
+         graph[v2].push_back(new Edge(v2, v1, wt));
+      }
+      
+      int src ;
+      cin>>src;
+      
+      unordered_set<int> visited;
+      hamiltonian(graph,src,visited, to_string(src) , src , vtces);
+      
+      return 0;
+    
+}
