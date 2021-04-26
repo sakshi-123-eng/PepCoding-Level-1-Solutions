@@ -1,0 +1,56 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/graphs/knights-tour-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void printKnightsTour(int* chess, int r , int c , int move , int n) {
+    if(r<0 || c<0 || r>= n || c>=n || *(chess+r*n+c)>0){
+        return;
+    }
+    else if(move == n*n){
+       *( chess+r*n+c )= move;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                cout<<*(chess+i*n+j)<<" ";
+            }
+            cout<<"\n";
+        }
+        *(chess+r*n+c) = 0;
+        cout<<"\n";
+        return ;
+    }
+    
+    
+    *(chess+r*n+c)= move ;
+    printKnightsTour((int*)chess, r-2 , c+1 , move +1,n); //1
+    printKnightsTour((int*)chess, r-1 , c+2 , move +1,n); //2
+    printKnightsTour((int*)chess, r+1 , c+2 , move +1,n);  //3
+    printKnightsTour((int*)chess, r+2 , c+1 , move +1,n);  // 4
+    printKnightsTour((int*)chess, r+2 , c-1 , move +1,n); // 5
+    printKnightsTour((int*)chess, r+1 , c-2 , move +1,n); // 6
+    printKnightsTour((int*)chess, r-1 , c-2 , move +1,n);  // 7
+    printKnightsTour((int*)chess, r-2 , c-1 , move +1,n);  //8
+    
+    *(chess+r*n+c) = 0;
+}
+    
+    
+int main(){
+    int n , r , c ;
+    cin>>n;
+    cin>>r;
+    cin>>c;
+    
+    int chess[n][n] ;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            chess[i][j]=0;
+        }
+    }
+    
+    printKnightsTour((int*)chess , r, c, 1 , n);
+    return 0;
+}
