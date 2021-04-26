@@ -1,0 +1,64 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/find-in-tree-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+
+bool find(Node* node, int data) {
+    if(node->data == data){
+        return true;
+    }
+    
+   for (Node* child: node->children) {
+       bool flc = find(child,data);
+       if(flc){
+           return true;
+       }
+   }
+   return false;
+}
+
+int main(){
+    int n,data;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    Node* root = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root = t;
+            }
+            
+            st.push(t);
+        }
+}
+    cin>>data;
+    bool flag = find(root, data);
+    if(flag==true){
+        cout<<"true";
+    }else{
+        cout<<"false";
+    }
+    
+    return 0;
+}
