@@ -1,0 +1,61 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/graphs/count-islands-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Edge{
+    public:
+    int src;
+    int nbr;
+    int wt;
+    
+    Edge(int src , int nbr , int wt){
+        this->src = src;
+        this->nbr = nbr;
+        this->wt = wt;
+    }
+    
+};
+int M ,N ;
+
+void drawTreeForComponent(int* arr,int i,int j,bool* visited,int n,int m){
+    if(i<0 || j<0 || i>=m || j>= n || *(arr+i*n+j)==1 || *(visited+i*n+j) ==true){
+        return ;
+    }
+    
+    
+    *(visited+i*n+j) = true;
+    drawTreeForComponent((int*)arr,i-1,j,(bool*) visited,n,m);
+    drawTreeForComponent((int*)arr,i,j+1,(bool*) visited,n,m);
+    drawTreeForComponent((int*)arr,i,j-1,(bool*) visited,n,m);
+    drawTreeForComponent((int*)arr,i+1,j,(bool*) visited,n,m);
+}
+
+int main(){
+    
+    int m , n ;
+    cin>>n>>m;
+    int arr[n][m];
+      for (int i = 0; i <n; i++) {
+         for (int j = 0; j < m ; j++) {
+             cin>>arr[i][j];
+         }
+      }
+      
+      bool visited[n][m]={false};
+      int count =0;
+      for(int i=0;i<n;i++){
+          for(int j=0;j<m;j++){
+              if(arr[i][j]==0 && visited[i][j] == false){
+                  drawTreeForComponent((int*) arr,i,j,(bool*) visited,n,m);
+                  count++;
+              }
+          }
+      }
+      cout<<count<<"\n";
+    
+    return 0;
+}
