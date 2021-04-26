@@ -1,0 +1,64 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/graphs/perfect-friends-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Edge{
+    public:
+    int src;
+    int nbr;
+    
+    Edge(int src , int nbr ){
+        this->src = src;
+        this->nbr = nbr;
+    }
+    
+};
+
+void drawTreeAndGenerateComp(vector<Edge*>graph[],int vertx ,vector<int> &comp , bool visited[]){
+    visited[vertx]=true;
+    comp.push_back(vertx);
+    for(Edge* edge : graph[vertx]){
+        if(visited[edge->nbr]==false){
+            drawTreeAndGenerateComp(graph,edge->nbr , comp ,visited);
+        }
+    }
+}
+
+
+
+int main(){
+
+      int vtces,edges;
+      cin>>vtces>>edges;
+      vector<Edge*>graph[vtces];
+      for(int i = 0; i < edges; i++){
+         int v1,v2;
+         cin>>v1>>v2;
+         graph[v1].push_back(new Edge(v1, v2));
+         graph[v2].push_back(new Edge(v2, v1));
+      }
+      bool visited[vtces]={false};
+      vector<vector<int>>res;
+
+      for(int v=0;v<vtces;v++){
+          if(visited[v]==false){
+             vector<int>comp;
+              drawTreeAndGenerateComp(graph, v , comp , visited);
+              res.push_back(comp);
+          }
+      }
+      int pairs =0;
+      for(int i=0;i<res.size();i++){
+          for(int j=i+1;j<res.size();j++){
+              pairs = pairs + res[i].size()*res[j].size();
+          }
+      }
+    
+     cout<<pairs<<"\n";
+      return 0;
+    
+}
