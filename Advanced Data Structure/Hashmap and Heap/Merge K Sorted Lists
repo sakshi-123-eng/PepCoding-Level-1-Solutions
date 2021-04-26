@@ -1,0 +1,69 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/hashmap-and-heap/merge-k-sorted-lists-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Pair{
+    public:
+    int li; // list index
+    int di; // data index
+    int val; // data
+    
+    Pair(int li,int di , int val){
+        this->li = li;
+        this->di = di;
+        this->val = val;
+    }
+    
+     
+};
+
+auto cmp = [](Pair* left , Pair* right){return left->val>right->val;};
+
+
+
+vector<int> mergeKSortedLists(vector<vector<int>> lists){
+      vector<int> rv;
+      priority_queue<Pair*,vector<Pair*>,decltype(cmp)> pq(cmp);
+      for(int i =0;i<lists.size();i++){
+          Pair* p = new Pair(i,0,lists.at(i).at(0));
+          pq.push(p);
+      }
+      
+      while(pq.size()>0){
+          Pair* p = pq.top();
+          pq.pop();
+          rv.push_back(p->val);
+          p->di++;
+          
+          if(p->di < lists.at(p->li).size()){
+              p->val = lists.at(p->li).at(p->di);
+              pq.push(p);
+          }
+      }
+      return rv;
+   }
+
+int main(){
+    int k,n,val;
+    cin>>k;
+    vector<vector<int>>lists;
+    for(int i=0;i<k;i++){
+        vector<int> list ;
+        cin>>n;
+        for(int j=0;j<n;j++){
+            cin>>val;
+            list.push_back(val);
+        }
+        lists.push_back(list);
+    }
+    vector<int> mlist =  mergeKSortedLists(lists);
+    for(int val: mlist){
+        cout<<val<<" ";
+    }
+    cout<<"\n";
+    return 0;
+}
