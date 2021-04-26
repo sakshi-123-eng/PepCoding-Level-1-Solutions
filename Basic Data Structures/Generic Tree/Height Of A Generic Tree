@@ -1,0 +1,70 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/height-of-generic-tree-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+#include<vector>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+
+
+int max(Node* node) {
+    int maximum = INT_MIN;
+    
+    for( Node* child : node->children){
+        int current_maximum = max(child);
+        maximum = max(maximum , current_maximum );
+    }
+    maximum = max(node->data , maximum);
+    return maximum;
+}
+int height(Node* node){
+    int ht = -1; //  ht = height
+    
+    for( Node* child : node->children){
+        int current_height = height(child);
+        ht = max(ht,current_height);
+    }
+    ht+= 1;
+    
+    return ht;
+}
+
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    Node* root = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root = t;
+            }
+            
+            st.push(t);
+        }
+    }
+    int heightt = height(root);
+    cout<<heightt;
+    
+    return 0;
+}
