@@ -1,0 +1,82 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/graphs/infection-spread-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// my answer
+class Edge{
+    public:
+    int src;
+    int nbr;
+    int wt;
+    
+    Edge(int src , int nbr , int wt){
+        this->src = src;
+        this->nbr = nbr;
+        this->wt = wt;
+    }
+    
+};
+
+class Pair{
+    public:
+    int v ; // vertex
+    int time;
+    
+    Pair(int v, int time){
+        this->v = v;
+        this->time = time;
+    }
+};
+int main(){
+
+      int vtces,edges;
+      cin>>vtces>>edges;
+      vector<Edge*>graph[vtces];
+      for(int i = 0; i < edges; i++){
+         int v1,v2,wt;
+         cin>>v1>>v2>>wt;
+         graph[v1].push_back(new Edge(v1, v2, wt));
+         graph[v2].push_back(new Edge(v2, v1, wt));
+      }
+
+      int src,t;
+      cin>>src;
+      cin>>t;
+
+
+
+    queue<Pair*>q;
+    q.push(new Pair(src,1));
+    int visited[vtces];   //={false} 
+    int count =0;
+    for(int i=0;i< vtces;i++){
+         visited[i]= 0;
+     }
+    
+    
+    while(q.size()>0){
+         Pair* rem = q.front();
+         q.pop();
+         if(visited[rem->v] >0){
+            continue;
+         }
+         visited[rem->v]=rem->time;
+         if(rem->time>t){
+             break;
+         }
+         count++;
+         
+         
+         for(Edge* e: graph[rem->v]){
+             if(visited[e->nbr] == 0){
+                q.push(new Pair(e->nbr , rem->time + 1));
+             }
+         }
+    }
+    cout<<count<<"\n";
+    return 0;
+}
