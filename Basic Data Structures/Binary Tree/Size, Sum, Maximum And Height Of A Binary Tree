@@ -1,0 +1,162 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/binary-tree/size-sum-max-height-binarytree-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+#include <sstream>
+
+using namespace std;
+class Node {
+    public:
+    int data;
+    Node * left;
+    Node * right;
+
+    Node(int data, Node * left, Node * right) {
+        this-> data = data;
+        this-> left = left;
+        this -> right = right;
+    }
+};
+
+class Pair {
+    public:
+        Node * node;
+    int state;
+
+    Pair(Node * node, int state) {
+        this -> node = node;
+        this -> state = state;
+    }
+};
+
+
+
+
+Node * construct(int arr[]) {
+    Node * root = new Node(arr[0], NULL, NULL);
+    Pair * rtp = new Pair(root, 1);
+
+    stack < Pair * > st;
+    st.push(rtp);
+
+    int idx = 0;
+    while (st.size() > 0) {
+        Pair * peek = st.top();
+        if (peek -> state == 1) {
+            idx++;
+            if (arr[idx] != INT_MAX) {
+                peek -> node -> left = new Node(arr[idx], NULL, NULL);
+                Pair * lp = new Pair(peek -> node -> left, 1);
+                st.push(lp);
+            } else {
+                peek -> node -> left = NULL;
+            }
+
+            peek -> state++;
+        } else if (peek -> state == 2) {
+            idx++;
+            if (arr[idx] != INT_MAX) {
+                peek -> node -> right = new Node(arr[idx], NULL, NULL);
+                Pair * rp = new Pair(peek -> node -> right, 1);
+                st.push(rp);
+            } else {
+                peek -> node -> right = NULL;
+            }
+
+            peek -> state++;
+        } else {
+            st.pop();
+        }
+    }
+
+    return root;
+}
+
+void display(Node * node) {
+    if (node == NULL) {
+        return;
+    }
+
+    string str = "";
+    str += node -> left == NULL ? "." : to_string(node -> left -> data) + "";
+    str += " <- " + to_string(node -> data) + " -> ";
+    str += node -> right == NULL ? "." : to_string(node -> right -> data) + "";
+    cout << str << endl;
+
+    display(node -> left);
+    display(node -> right);
+}
+int size(Node * node) {
+    if (node == NULL) {
+        return 0;
+    }
+    int ls = size(node -> left);
+    int rs = size(node -> right);
+    int ts = ls + rs + 1;
+    return ts;
+}
+int sum(Node * node) {
+    if (node == NULL) {
+        return 0;
+    }
+    int lsm = sum(node -> left);
+    int rsm = sum(node -> right);
+    int tsm = lsm + rsm + node -> data;
+    return tsm;
+}
+int max(Node * node) {
+    if (node == NULL) {
+        return INT_MIN;
+    }
+    int lm = max(node -> left);
+    int rm = max(node -> right);
+    int tm = max(node -> data, max(lm, rm));
+    return tm;
+}
+int height(Node * node) {
+    if (node == NULL) {
+        return -1; // return -1 for edges and return 0 for nodes
+    }
+    int lm = height(node -> left);
+    int rm = height(node -> right);
+    int tm = max(lm, rm) + 1;
+    return tm;
+}
+
+int main() {
+
+    int num;
+    cin >> num;
+    string a[num];
+    int arr[num];
+    string str;
+    for(int i=0;i<num;i++){
+        cin>>str;
+        a[i]=str;
+    }
+
+   for(int i=0;i<num;i++){
+      if (a[i]=="n") {
+            arr[i] = INT_MAX;
+        } else {
+            istringstream sv(a[i]);
+            int val;
+            sv>>val;
+            arr[i] = val;
+        }  
+
+   }
+        Node* root = construct(arr);
+
+        int sizei = size(root);
+        int sumi = sum(root);
+        int maxi = max(root);
+        int ht = height(root);
+        cout<<sizei<<"\n";
+        cout<<sumi<<"\n";
+        cout<<maxi<<"\n";
+        cout<<ht<<"\n";
+    return 0;
+}
