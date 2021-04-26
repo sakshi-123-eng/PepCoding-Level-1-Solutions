@@ -1,0 +1,84 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/distance-between-nodes-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+
+vector<int> nodeToRootPath(Node* node, int data) {
+    if(node->data == data){
+        vector<int>list;
+        list.push_back(node->data);
+        return list;
+    }
+    
+   for (Node* child: node->children) {
+       vector<int>ptc= nodeToRootPath(child,data);  // ptc = path till child
+       if(ptc.size()>0){
+           ptc.push_back(node->data);
+           return ptc;
+       }
+   }
+   vector<int>v;
+   return v;
+}
+int lca(Node* node , int d1 ,int d2){
+    vector<int>p1 =  nodeToRootPath(node,d1);
+    vector<int>p2 =  nodeToRootPath(node,d2);
+    
+    int i = p1.size()-1;
+    int j = p2.size()-1;
+    while(i>=0 && j>=0 && p1[i]==p2[j]){
+        i--;
+        j--;
+    }
+    
+    i++;
+    j++;
+    int res = i+j;
+    return res;
+}
+
+int main(){
+    int n,d1,d2;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    Node* root = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root = t;
+            }
+            
+            st.push(t);
+        }
+}
+    cin>>d1;
+    cin>>d2;
+    int ans = lca(root, d1, d2);
+    cout<<ans;
+    
+    
+    
+    
+    return 0;
+}
