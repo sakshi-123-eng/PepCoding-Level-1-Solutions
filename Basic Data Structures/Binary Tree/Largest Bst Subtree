@@ -1,0 +1,155 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/binary-tree/largest-bst-subtree-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+
+#include <sstream>
+
+using namespace std;
+class Node {
+    public:
+        int data;
+    Node * left;
+    Node * right;
+
+    Node(int data, Node * left, Node * right) {
+        this -> data = data;
+        this -> left = left;
+        this -> right = right;
+    }
+};
+
+class Pair {
+    public:
+        Node * node;
+    int state;
+
+    Pair(Node * node, int state) {
+        this -> node = node;
+        this -> state = state;
+    }
+};
+
+Node * construct(int arr[]) {
+    Node * root = new Node(arr[0], NULL, NULL);
+    Pair * rtp = new Pair(root, 1);
+
+    stack < Pair * > st;
+    st.push(rtp);
+
+    int idx = 0;
+    while (st.size() > 0) {
+        Pair * peek = st.top();
+        if (peek -> state == 1) {
+            idx++;
+            if (arr[idx] != INT_MAX) {
+                peek -> node -> left = new Node(arr[idx], NULL, NULL);
+                Pair * lp = new Pair(peek -> node -> left, 1);
+                st.push(lp);
+            } else {
+                peek -> node -> left = NULL;
+            }
+
+            peek -> state++;
+        } else if (peek -> state == 2) {
+            idx++;
+            if (arr[idx] != INT_MAX) {
+                peek -> node -> right = new Node(arr[idx], NULL, NULL);
+                Pair * rp = new Pair(peek -> node -> right, 1);
+                st.push(rp);
+            } else {
+                peek -> node -> right = NULL;
+            }
+
+            peek -> state++;
+        } else {
+            st.pop();
+        }
+    }
+
+    return root;
+}
+
+
+class BSTpair{
+    public:
+    bool isBST;
+    int maxi;
+    int mini;
+    Node* root;
+    int size;
+};
+
+BSTpair* lBST(Node* node){
+    if(node == NULL){
+        BSTpair* bp = new BSTpair();
+        bp->mini = INT_MAX;
+        bp->maxi = INT_MIN;
+        bp->isBST = true;
+        bp->size = 0;
+        bp->root = NULL;
+        return bp;
+    }
+    
+    BSTpair* lp = lBST(node->left);
+    BSTpair* rp = lBST(node->right);
+    BSTpair* mp = new BSTpair();
+    if(lp->isBST && rp->isBST && (node->data>=lp->maxi && node->data <= rp->mini)){
+         mp->isBST = true;
+    }else{
+         mp->isBST=false;
+    }
+    // mp->isBST = lp->isBST && rp->isBST && (node->data>=lp->maxi && node->data <= rp->mini);
+    
+    mp->mini = min(node->data,min(rp->mini,lp->mini));
+    mp->maxi = max(node->data,max(rp->maxi,lp->maxi));
+    
+    
+    
+    if(mp->isBST){
+        mp->root=node;
+        mp->size = lp->size + rp->size + 1;
+    }else if(lp->size>rp->size){
+        mp->root = lp->root;
+        mp->size = lp->size;
+    }else{
+        mp->root = rp->root;
+        mp->size = rp->size;
+    }
+    
+    return mp;
+    
+}
+
+
+int main() {
+
+    int num;
+    cin >> num;
+    string a[num];
+    int arr[num];
+    string str;
+    for (int i = 0; i < num; i++) {
+        cin >> str;
+        a[i] = str;
+
+    }
+    for (int i = 0; i < num; i++) {
+        if (a[i] == "n") {
+            arr[i] = INT_MAX;
+        } else {
+            istringstream sv(a[i]);
+            int val;
+            sv >> val;
+            arr[i] = val;
+        }
+    }
+
+    Node * roott = construct(arr);
+    BSTpair* res = lBST(roott);
+    cout<<res->root->data <<"@"<<res->size;
+
+    return 0;
+}
