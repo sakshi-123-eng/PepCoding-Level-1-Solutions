@@ -1,0 +1,33 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/hashmap-and-heap/sort-ksorted-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+//time complexity = log(n) base k , space complexity = k;
+int main(){
+    int n,k;
+    cin>>n;
+    int arr[n];
+    priority_queue<int,vector<int>,greater<int>>ele;
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    cin>>k;
+    for(int i=0;i<n;i++){
+        if(i<=k){
+            ele.push(arr[i]);
+        }else{
+            cout<<ele.top()<<"\n";
+            ele.pop();
+            ele.push(arr[i]);
+        }
+       
+    }
+    while(ele.size()>0){
+        cout<<ele.top()<<"\n";
+        ele.pop();
+    }
+    return 0;
+}
