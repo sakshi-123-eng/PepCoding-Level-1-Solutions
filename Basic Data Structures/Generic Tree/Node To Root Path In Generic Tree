@@ -1,0 +1,78 @@
+Question:-
+https://www.pepcoding.com/resources/online-java-foundation/generic-tree/node-to-root-path-official/ojquestion
+
+Code:-
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    vector<Node*>children;
+};
+
+vector<int> nodeToRootPath(Node* node, int data) {
+    if(node->data == data){
+        vector<int>list;
+        list.push_back(node->data);
+        return list;
+    }
+    
+   for (Node* child: node->children) {
+       vector<int>ptc= nodeToRootPath(child,data);  // ptc = path till child
+       if(ptc.size()>0){
+           ptc.push_back(node->data);
+           return ptc;
+       }
+   }
+   vector<int>v;
+   return v;
+}
+
+int main(){
+    int n,data;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    Node* root = NULL;
+    stack<Node*> st ;
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]==-1){
+            st.pop();
+        }else{
+            Node* t= new Node();
+            t->data = arr[i];
+            
+            if(st.size()>0){
+                st.top()->children.push_back(t);
+            }else{
+                root = t;
+            }
+            
+            st.push(t);
+        }
+}
+    cin>>data;
+    
+    vector<int>final = nodeToRootPath(root,data);
+    cout<<"[";
+     for(int k:final){
+       if(k==final[final.size()-1]){
+           cout<<k<<"]";
+       }else{
+            cout<<k<<", ";
+       }
+    
+    }
+    if(final.size()==0){
+        cout<<"]";
+    }
+    
+    
+    
+    return 0;
+}
