@@ -1,7 +1,7 @@
-Question:-
-https://www.pepcoding.com/resources/online-java-foundation/introduction-to-recursion/factorial-official/ojquestion
+//Question:-
+//https://www.pepcoding.com/resources/online-java-foundation/introduction-to-recursion/factorial-official/ojquestion
 
-Code:-
+//Code:-
 
 #include<iostream>
 using namespace std;
